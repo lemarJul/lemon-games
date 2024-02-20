@@ -7,9 +7,9 @@ class SoundController extends AbstractController {
   }
 
   static _rsc = {
-    laser: "../assets/sounds/8-bit-laser-151672.mp3",
-    start: "../assets/sounds/beep3-98810.mp3",
-    boom: "../assets/sounds/bd-8-bits-16-91523.mp3",
+    laser: "assets/sounds/8-bit-laser-151672.mp3",
+    start: "assets/sounds/beep3-98810.mp3",
+    boom: "assets/sounds/bd-8-bits-16-91523.mp3",
   };
 
   _playAudio(audio) {
