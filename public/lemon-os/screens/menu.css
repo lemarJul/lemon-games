@@ -1,0 +1,71 @@
+#display * {
+  font-family: var(--screen-font);
+}
+
+.lemonGame-title {
+  font-size: 55px;
+  line-height: 75px;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: inherit;
+  height: inherit;
+  justify-content: flex-start;
+}
+.disabled-screen {
+  display: none !important;
+}
+
+.menu {
+  height: inherit;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  gap: 10px;
+  padding: 0;
+  margin: auto 0;
+}
+.menu-list p {
+  margin: 0;
+  padding: 0;
+}
+.menu-button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--screen-font);
+  background-color: var(--color-screen-medium);
+  color: var(--color-screen-light);
+  width: 200px;
+}
+@keyframes blink {
+  0%,
+  49% {
+    background-color: var(--color-screen-dark);
+  }
+  50%,
+  100% {
+    background-color: var(--color-screen-medium);
+  }
+}
+
+.menu-list button:hover,
+.menu-list button:focus {
+  animation: none;
+  background-color: var(--color-screen-dark);
+  color: var(--color-screen-light);
+}
