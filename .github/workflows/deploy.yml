@@ -1,19 +1,20 @@
 name: Deploy to GitHub Pages
 
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 
 jobs:
-    deploy:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-                uses: actions/checkout@v2
+  update-gh-pages:
+    runs-on: ubuntu-latest
 
-            - name: Deploy
-                run: |
-                    git subtree split --prefix public -b gh-pages
-                    git push -f origin gh-pages:gh-pages
-                    git branch -D gh-pages
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create and push gh-pages branch
+        run: |
+          git subtree split --prefix public -b gh-pages
+          git push -f origin gh-pages:gh-pages
+          git branch -D gh-pages
