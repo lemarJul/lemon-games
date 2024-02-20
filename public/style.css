@@ -4,7 +4,7 @@
 }
 
 :root {
-  --color-orange: #ffb73a;
+  --color-orange: #fcaaef;
   --color-primary-light: rgb(84, 153, 210);
   --color-primary: rgb(70, 130, 180);
   --color-primary-dark: #325c7e;
@@ -28,7 +28,7 @@ body {
   display: grid;
   grid-template-rows: 1fr auto;
   grid-template-columns: 100%;
-  background-color: #ffca3a;
+  background-color: var(--color-orange);
   gap: 20px;
 }
 
