@@ -9,6 +9,7 @@ lemon-screen {
   text-align: center;
   width: inherit;
   height: inherit;
+  justify-content: space-between ;
 }
 lemon-screen.disabled-screen {
   display: none;
@@ -47,7 +48,5 @@ lemon-screen.disabled-screen {
 }
 
 .bottom-button {
-  position: absolute;
-  bottom: 0;
   width: 100%;
 }

@@ -27,3 +27,8 @@ a {
         transform: translateY(-100%);
     }
 }
+
+#credits .bottom-button {
+position : absolute;
+bottom: 0;
+}
