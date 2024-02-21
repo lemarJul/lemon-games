@@ -47,6 +47,11 @@ export default class LemonOS extends AbstractExe {
       path: "lemon-os/screens/menu.html",
       script: true,
     },
+    {
+      name: "credits",
+      path: "lemon-os/screens/credits.html",
+      script: true,
+    },
   ];
 
   // static style = "lemon-os/screens/lemon-os.css";
@@ -75,7 +80,7 @@ export default class LemonOS extends AbstractExe {
       console.log("clicked", game.name);
       this.screenController.display[game.name]();
     });
-    gameList.appendChild(clone);
+    gameList.insertBefore(clone, gameList.firstChild);
   }
 
   boot() {

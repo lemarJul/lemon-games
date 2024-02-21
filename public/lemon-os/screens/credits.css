@@ -1,0 +1,29 @@
+.scrolling-content {
+    animation : scroll 25s linear infinite;
+    animation-delay: 1s;
+}
+
+.scrolling-content li, .scrolling-content p {
+    font-size: x-small;
+}
+.scrolling-content ul{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+}
+a {
+    color: var(--color-medium-red);
+    text-decoration: none;
+}
+
+@keyframes scroll {
+    to {
+        transform: translateY(-100%);
+    }
+}
