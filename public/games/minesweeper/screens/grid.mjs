@@ -9,7 +9,6 @@ export default function () {
 
   dispatchGameStarted_onCellActionEvent.bind(this)();
   toggleSettingsPanel_onSettingsButtonClicked.bind(this)();
-  contextMenuDisabled_onRightClick.bind(this)();
   gameWon_onGameWonEvent.bind(this)();
 }
 
@@ -29,14 +28,6 @@ function toggleSettingsPanel_onSettingsButtonClicked() {
   });
 }
 
-function contextMenuDisabled_onRightClick() {
-  console.log(`${this.constructor.name}: right click disabled`);
-  document
-    .querySelector(".grid-container")
-    .addEventListener("contextmenu", (e) => {
-      e.preventDefault();
-    });
-}
 function gameWon_onGameWonEvent() {
   document.addEventListener("gridComplete", () => {
     console.log(`${this.constructor.name}: onGameWon`);
