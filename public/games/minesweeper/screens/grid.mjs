@@ -32,7 +32,7 @@ function toggleSettingsPanel_onSettingsButtonClicked() {
 function contextMenuDisabled_onRightClick() {
   console.log(`${this.constructor.name}: right click disabled`);
   document
-    .querySelector(".main-container")
+    .querySelector(".grid-container")
     .addEventListener("contextmenu", (e) => {
       e.preventDefault();
     });
