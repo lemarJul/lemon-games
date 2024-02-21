@@ -21,6 +21,7 @@
   --color-light-red: salmon;
 }
 body {
+  overflow: hidden;
   box-sizing: border-box;
   padding: 30px;
   margin: 0;
@@ -328,13 +329,21 @@ lemon-games[data-power] #display {
 
 footer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  font-size: small;
+  justify-content: center;
+  gap: 15px;
+  font-size: smaller;
   color: var(--color-primary);
   font-family: sans-serif;
 }
 footer a {
   color: var(--color-primary);
   text-decoration: none;
+}
+
+.social-links {
+  display: flex;
+  gap: 10px;
+  font-size: medium;
 }
