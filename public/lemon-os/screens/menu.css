@@ -34,6 +34,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  list-style: none;
 
   gap: 10px;
   padding: 0;
@@ -63,9 +64,15 @@
   }
 }
 
-.menu-list button:hover,
-.menu-list button:focus {
+.menu-button:hover,
+.menu-button:focus {
   animation: none;
   background-color: var(--color-screen-dark);
   color: var(--color-screen-light);
+}
+
+.bottom-button {
+  position: absolute;
+  bottom: 0;
+  /* border-radius: 100% 100% 0 0 ; */
 }
