@@ -1,62 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lemon Games</title>
-    <link rel="icon" href="assets/images/lemon.png" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="assets/images/lemon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
     <script src="script.js" type="module" defer></script>
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
     <lemon-games>
-        <div id="console-container" class="main-container">
-            <div class="above-screen">
-              <div class="sound-grid">
-                <div class="sound-hole"></div>
-                <div class="sound-hole"></div>
-                <div class="sound-hole"></div>
-                <div class="sound-hole"></div>
-              </div>
-              <div id="power-light"></div>
-              <div class="sound-grid">
-                <div class="sound-hole"></div>
-                <div class="sound-hole"></div>
-                <div class="sound-hole"></div>
-                <div class="sound-hole"></div>
-              </div>
-              <div id="power-button"></div>
+      <div id="console-container" class="main-container">
+        <div class="above-screen">
+          <div class="sound-grid">
+            <div class="sound-hole"></div>
+            <div class="sound-hole"></div>
+            <div class="sound-hole"></div>
+            <div class="sound-hole"></div>
+          </div>
+          <div id="power-light"></div>
+          <div class="sound-grid">
+            <div class="sound-hole"></div>
+            <div class="sound-hole"></div>
+            <div class="sound-hole"></div>
+            <div class="sound-hole"></div>
+          </div>
+          <div id="power-button"></div>
+        </div>
+        <div class="screen-container">
+          <div id="screen-off"></div>
+          <div id="display">
+            <!-- Screens injected here -->
+          </div>
+          <div id="screen-frame"></div>
+        </div>
+
+        <div class="below-screen">
+          <h1 id="brand" class="embossed">LEMON GAMES</h1>
+          <div class="controls-container">
+            <div class="buttons-container left">
+              <div id="left-button" class="button direction shading"></div>
+              <div id="right-button" class="button direction shading"></div>
             </div>
-            <div class="screen-container">
-              <div id="screen-off"></div>
-              <div id="display">
-                <!-- Screens injected here -->
-              </div>
-              <div id="screen-frame"></div>
-            </div>
-          
-            <div class="below-screen">
-              <h1 id="brand" class="embossed">LEMON GAMES</h1>
-              <div class="controls-container">
-                <div class="buttons-container left">
-                  <div id="left-button" class="button direction shading"></div>
-                  <div id="right-button" class="button direction shading"></div>
-                </div>
-          
-                <span id="start-button" class="button"></span>
-          
-                <div class="buttons-container right">
-                  <div id="primary-button" class="button action shading"></div>
-                  <div id="secondary-button" class="button action shading"></div>
-                </div>
-              </div>
+
+            <span id="start-button" class="button"></span>
+
+            <div class="buttons-container right">
+              <div id="primary-button" class="button action shading"></div>
+              <div id="secondary-button" class="button action shading"></div>
             </div>
           </div>
-          
+        </div>
+      </div>
     </lemon-games>
-    <footer>    
-        <p>© 2023 Julien Lemarchand</p>
+    <footer>
+      <p>© 2024 Julien Lemarchand</p>
+      <a href="https://github.com/lemarJul" target="_blank"
+        ><i class="fab fa-github"></i
+      ></a>
+      <a href="https://www.linkedin.com/in/julien-lemarchand/" target="_blank"
+        ><i class="fab fa-linkedin"></i
+      ></a>
     </footer>
-</body>
-
+  </body>
 </html>
