@@ -3,7 +3,7 @@ export default class Screen extends HTMLElement {
     super();
     this.id = name;
     this.src = path;
-    this.classList.add("screen");
+    // this.classList.add("screen");
     this.innerHTML = content;
   }
   static disabled = "disabled-screen";
