@@ -76,3 +76,30 @@
   bottom: 0;
   /* border-radius: 100% 100% 0 0 ; */
 }
+.hud {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  background: var(--color-screen-dark);
+  gap: 3px;
+}
+.hud > *{
+  position: relative;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--screen-font);
+  background-color: var(--color-screen-medium);
+  color: var(--color-screen-light);
+  flex-grow: 1;
+}
+.hud > *:hover,
+.hud > *:active {
+  animation: none;
+  background-color: var(--color-screen-dark);
+  color: var(--color-screen-light);
+}
+.hud :nth-child(3){
+  flex-grow: 4;
+}
