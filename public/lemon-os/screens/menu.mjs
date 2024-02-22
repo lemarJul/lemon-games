@@ -1,4 +1,4 @@
-var redirectionAttribute = "show-screen";
+var redirectionAttribute = "data-show-screen";
 
 export default function () {
   document
