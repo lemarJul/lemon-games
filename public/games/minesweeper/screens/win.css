@@ -1,0 +1,38 @@
+#winHeadband {
+  background-color: var(--color-screen-dark);
+  color: var(--color-screen-light);
+  text-align: center;
+  margin-top: 40px;
+  width: 100%;
+}
+
+#name-submit {
+  margin: 10px auto;
+  display: block;
+  background-color: var(--color-screen-medium);
+  color: var(--color-screen-light);
+  border: none;
+  /* padding: 5px 10px; */
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+}
+
+#name-submit::placeholder {
+  color: var(--color-screen-light);
+}
+#name-submit:focus,
+#name-submit:hover {
+  outline: none;
+  background-color: var(--color-screen-dark);
+}
+#name-submit.empty:not(:focus) {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% {opacity: 1;}
+    50% {opacity: 0;}
+    100% {opacity: 1;}
+}

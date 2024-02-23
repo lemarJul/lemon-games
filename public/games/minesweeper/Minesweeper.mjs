@@ -17,7 +17,7 @@ export default class MineSweeper extends AbstractExe {
       script: true,
     },
     { name: "fail", path: "games/minesweeper/screens/fail.html", script: true },
-    { name: "win", path: "games/minesweeper/screens/win.html" },
+    { name: "win", path: "games/minesweeper/screens/win.html", script: true},
     {
       name: "settings",
       path: "games/minesweeper/screens/settings.html",
