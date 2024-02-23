@@ -40,8 +40,10 @@ lemon-screen.disabled-screen {
   width: 200px;
 }
 
+
 .menu-button:hover,
-.menu-button:active {
+.menu-button:active,
+.menu-button:focus {
   animation: none;
   background-color: var(--color-screen-dark);
   color: var(--color-screen-light);
