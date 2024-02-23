@@ -1,14 +1,16 @@
+const SCREEN = document.querySelector("#settings");
+
 export default function () {
-  const difficultyToggle = document.querySelector("#difficultyToggle");
+  const difficultyToggle = SCREEN.querySelector("#difficultyToggle");
   difficultyToggle.addEventListener("click", toggleDifficulty);
 
-  const safeCornersToggle = document.querySelector("#safeCornersToggle");
+  const safeCornersToggle = SCREEN.querySelector("#safeCornersToggle");
   safeCornersToggle.addEventListener("click", toggleSafeCorners);
 }
 
 function toggleSafeCorners() {
-  var radioOn = document.getElementById("safeCornersOn");
-  var radioOff = document.getElementById("safeCornersOff");
+  var radioOn = SCREEN.querySelector("#safeCornersOn");
+  var radioOff = SCREEN.querySelector("#safeCornersOff");
 
   if (radioOn.checked) {
     radioOff.checked = true;
@@ -18,8 +20,8 @@ function toggleSafeCorners() {
 }
 
 function toggleDifficulty() {
-  const difficultySelect = document.querySelector("#difficulty-select");
-  const difficultyDetails = document.querySelectorAll("#difficulty-table tr");
+  const difficultySelect = SCREEN.querySelector("#difficulty-select");
+  const difficultyDetails = SCREEN.querySelectorAll("#difficulty-table tr");
 
   const nextDifficulty =
     (difficultySelect.selectedIndex + 1) % difficultySelect.length;
