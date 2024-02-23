@@ -72,11 +72,11 @@ export default class AbstractExe {
 
   //* STATIC METHODS
   static async initialize() {
-    await this._loadScreenHTML();
+    await this._fetchScreensContent();
     this._initialized = true;
   }
 
-  static async _loadScreenHTML() {
+  static async _fetchScreensContent() {
     const fetchScreen = async (screen) => {
       try {
         const res = await fetch(screen.path);
