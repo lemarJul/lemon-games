@@ -1,6 +1,7 @@
 import ButtonController from "./controllers/ButtonController.mjs";
 import ScreenController from "./controllers/ScreenController.mjs";
 import SoundController from "./controllers/SoundController.mjs";
+import DataController from "./controllers/DataController.mjs";
 
 const buttonController = new ButtonController();
 const soundController = new SoundController();
@@ -15,7 +16,8 @@ export default class AbstractExe {
     this.screenController = screenController;
     this.buttonController = buttonController;
     this.soundController = soundController;
-    this._addScreens();
+    this.dataController = new DataController(name);
+    this._loadScreens();
   }
 
   //* INSTANCE METHODS
@@ -34,9 +36,9 @@ export default class AbstractExe {
     }
   }
 
-  _addScreens() {
+  _loadScreens() {
     const screens = this.constructor.screens;
-    const registerScreen = (screen) => {
+    const loadSingleScreen = (screen) => {
       this.screenController.createScreen(screen);
 
       //TODO: where to put this? Who is responsible for loading the script?
@@ -45,13 +47,14 @@ export default class AbstractExe {
       const pathToScript = "../" + path.replace(".html", ".mjs");
       import(pathToScript)
         .then((module) => {
+
           module.default.call(this);
         })
         .catch((error) => {
           console.error(error);
         });
     };
-    screens.forEach(registerScreen);
+    screens.forEach(loadSingleScreen);
   }
 
   //* STATIC VARIABLES
