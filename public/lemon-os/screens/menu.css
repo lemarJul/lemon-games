@@ -9,7 +9,7 @@ lemon-screen {
   text-align: center;
   width: inherit;
   height: inherit;
-  justify-content: space-between ;
+  justify-content: space-between;
 }
 lemon-screen.disabled-screen {
   display: none;
@@ -39,8 +39,6 @@ lemon-screen.disabled-screen {
   color: var(--color-screen-light);
   width: 200px;
 }
-
-
 .menu-button:hover,
 .menu-button:active,
 .menu-button:focus {
@@ -51,4 +49,15 @@ lemon-screen.disabled-screen {
 
 .bottom-button {
   width: 100%;
+}
+
+.toggle-button {
+  display: inline-flex;
+  justify-content: space-between;
+}
+.toggle-button::before {
+  content: "<  ";
+}
+.toggle-button::after {
+  content: "  >";
 }
