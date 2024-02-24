@@ -1,6 +1,6 @@
 import AbstractController from "./AbstractController.mjs";
-import HTML from "./HtmlProvider.js";
-import Screen from "./Screen.mjs";
+import HTML from "../HtmlProvider.js";
+import Screen from "../Screen.mjs";
 
 export default class ScreenController extends AbstractController {
   constructor() {

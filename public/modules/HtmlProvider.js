@@ -29,16 +29,4 @@ export default {
   get consoleContainer() {
     return document.getElementById("console-container");
   },
-  // get settingsPanel() {
-  //   return document.getElementById("settings-panel");
-  // },
-  // get gameList() {
-  //   return document.getElementById("games-list");
-  // },
-  // get launchScreen() {
-  //   return document.getElementById("launch");
-  // },
-  // get menuScreen() {
-  //   return document.getElementById("main-menu");
-  // },
 };

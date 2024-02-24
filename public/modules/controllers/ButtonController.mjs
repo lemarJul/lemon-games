@@ -1,5 +1,5 @@
 import AbstractController from "./AbstractController.mjs";
-import HTML from "./HtmlProvider.js";
+import HTML from "../HtmlProvider.js";
 const { controls : ButtonElements } = HTML;
 
 export default class ButtonController extends AbstractController {
