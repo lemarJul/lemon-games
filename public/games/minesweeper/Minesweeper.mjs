@@ -23,7 +23,7 @@ export default class MineSweeper extends AbstractExe {
       path: "games/minesweeper/screens/settings.html",
       script: true,
     },
-    { name: "leaderboard", path: "games/minesweeper/screens/leaderboard.html" },
+    { name: "leaderboard", path: "games/minesweeper/screens/leaderboard.html", script: true},
   ];
   // static style = "games/minesweeper/screens/index.css";
 
