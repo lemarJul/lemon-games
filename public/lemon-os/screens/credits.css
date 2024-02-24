@@ -29,6 +29,6 @@ a {
 }
 
 #credits .bottom-button {
-position : absolute;
+position : sticky;
 bottom: 0;
 }
