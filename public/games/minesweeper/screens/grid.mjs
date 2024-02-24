@@ -1,6 +1,8 @@
+const SCREEN = document.querySelector("#grid");
+
 export default function () {
   // game stopped
-  document.addEventListener("gameStopped", () => {
+  SCREEN.addEventListener("gameStopped", () => {
     this.soundController.play.boom();
     setTimeout(() => {
       this.screenController.display.fail();
@@ -13,10 +15,10 @@ export default function () {
 }
 
 function dispatchGameStarted_onCellActionEvent() {
-  document.addEventListener("cellAction", () => {
+  SCREEN.addEventListener("cellAction", () => {
     if (this.started) return;
     this.started = true;
-    document.dispatchEvent(new Event("gameStarted"));
+    SCREEN.dispatchEvent(new Event("gameStarted"), { bubbles: true });
     console.log(`${this.constructor.name}: onGameStarted`);
   });
 }
@@ -24,12 +26,12 @@ function dispatchGameStarted_onCellActionEvent() {
 function toggleSettingsPanel_onSettingsButtonClicked() {
   this.htmlElements.startButton.addEventListener("click", () => {
     console.log(`${this.constructor.name}: Settings Button Clicked`);
-    this.screenController.display.settings();
+    this.screenController.display.MineSweeper();
   });
 }
 
 function gameWon_onGameWonEvent() {
-  document.addEventListener("gridComplete", () => {
+  SCREEN.addEventListener("gridComplete", () => {
     console.log(`${this.constructor.name}: onGameWon`);
     this.screenController.display.win();
     this.timer.stop();
