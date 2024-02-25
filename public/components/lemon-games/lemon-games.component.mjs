@@ -1,10 +1,10 @@
 import LemonOS from "../../lemon-os/lemon-os.mjs";
 await LemonOS.initialize();
 
-export default class LemOnGames extends HTMLElement {
+export default class LemonGames extends HTMLElement {
   constructor() {
     super();
-    this.innerHTML = LemOnGames.content;
+    this.innerHTML = LemonGames.content;
   }
 
   connectedCallback() {
@@ -35,7 +35,7 @@ export default class LemOnGames extends HTMLElement {
     this.content = await fetch(HTMLPath).then((response) => response.text());
   }
 }
-await LemOnGames._fetchContent();
-customElements.define("lemon-games", LemOnGames);
+await LemonGames._fetchContent();
+customElements.define("lemon-games", LemonGames);
 
 
