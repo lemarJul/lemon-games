@@ -5,10 +5,12 @@ import Screen from "../Screen.mjs";
 export default class ScreenController extends AbstractController {
   constructor() {
     super();
-    this.container = HTML.display;
     this.screens = {};
     this.display = {};
     this._currentScreen = null;
+  }
+  get container() {
+    return HTML.display;
   }
   set currentScreen(screen) {
     if (this._currentScreen) {
