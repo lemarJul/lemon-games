@@ -4,7 +4,8 @@ export default async function () {
   const gameScores = await this.dataController.getData() ;
 
   const fillTableWithScores = async () => {
-    const sortedScores = gameScores.sort((a, b) => b.score - a.score);
+    const sortedScores = gameScores.sort((a, b) => a.score - b.score);
+    console.log(sortedScores);
 
     const scoresByDifficulty = sortedScores.reduce(
       (acc, score) => {
