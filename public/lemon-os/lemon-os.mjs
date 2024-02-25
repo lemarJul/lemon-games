@@ -67,12 +67,13 @@ export default class LemonOS extends AbstractExe {
     const game = new Game();
     this.gameCollection[game.name] = game;
 
-    await this.updateGameList(game);
+    this.updateGameList(game);
     return this;
   }
 
   updateGameList(game) {
     const gameList = document.getElementById("games-list");
+    console.log("gameList", gameList);
     const buttonTemplate = document.getElementById("game-button-template");
     const clone = buttonTemplate.content.cloneNode(true);
     clone.querySelector("button").innerHTML = game.name;
