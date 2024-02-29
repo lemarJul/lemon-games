@@ -1,24 +1,31 @@
 export default class TimerDisplay {
   constructor(htmlElement) {
-    this.htmlElement = htmlElement;
+    console.log(htmlElement);
+    this.wrappedElement = htmlElement;
     this.defaultTime = "000";
     this.time = this.defaultTime;
     this.registerListerners();
   }
   registerListerners() {
-    document.addEventListener("gameStarted", this._start.bind(this));
-    document.addEventListener("gameStopped", this.stop.bind(this));
-    document.addEventListener("gameReset", this.reset.bind(this));
+    this.wrappedElement
+      .getRootNode()
+      .addEventListener("gameStarted", this.run.bind(this));
+    this.wrappedElement
+      .getRootNode()
+      .addEventListener("gameStopped", this.stop.bind(this));
+    this.wrappedElement
+      .getRootNode()
+      .addEventListener("gameReset", this.reset.bind(this));
   }
 
-  _start() {
-      this.interval = setInterval(this.incrementTimer.bind(this), 1000);
+  run() {
+    this.interval = setInterval(this.incrementTimer.bind(this), 1000);
   }
 
   incrementTimer() {
     this.time += 1;
     const formated = ("00" + this.time).slice(-3);
-    this.htmlElement.innerHTML = formated;
+    this.wrappedElement.innerHTML = formated;
   }
 
   stop() {
@@ -26,12 +33,12 @@ export default class TimerDisplay {
   }
 
   reset() {
+    this.stop();
     this.time = 0;
-    this.htmlElement.innerHTML = this.defaultTime;
+    this.wrappedElement.innerHTML = this.defaultTime;
   }
 
   getTime() {
     return this.time;
   }
- 
 }
