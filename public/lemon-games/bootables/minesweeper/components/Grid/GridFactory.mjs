@@ -18,6 +18,6 @@ export default class GridFactory {
       );
     }
 
-    return new SquareGrid(this._config['test'], safeCorners);
+    return new SquareGrid(this._config[difficulty], safeCorners);
   }
 }
