@@ -2,14 +2,14 @@
   width: 100%;
 } */
 
-#leaderboard table{
+#leaderboard table {
   padding: 0 25px;
 }
 #leaderboard tbody {
   height: 240px;
   width: 100%;
 }
-#leaderboard th:nth-of-type(2){
+#leaderboard th:nth-of-type(2) {
   width: 450px;
 }
 
@@ -20,3 +20,7 @@
   border-bottom: 1px dotted var(--color-screen-dark);
 }
 
+#leaderboard thead {
+  color: var(--color-screen-medium);
+  font-size: small;
+}

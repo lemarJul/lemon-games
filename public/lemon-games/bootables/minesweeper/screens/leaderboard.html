@@ -1,7 +1,5 @@
 <h2 class="menu-title">High Scores</h2>
-<div id="leaderboard-toggle" class>
-  <menu-button toggle> Easy </menu-button>
-</div>
+
 <table>
   <thead>
     <tr>
@@ -15,7 +13,13 @@
   <tbody id="hard-body"></tbody>
 </table>
 
-<menu-button link="MineSweeper" bottom> Exit </menu-button>
+
+<div class="bottom-buttons">
+  <menu-button toggle bottom> Easy </menu-button>
+  <menu-button link="MineSweeper" bottom> Exit </menu-button>
+
+</div>
+
 
 <template id="score-template">
   <tr>
