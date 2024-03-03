@@ -36,8 +36,10 @@ export default class AbstractExe {
 
       if (!screen.script) return;
 
-      const baseURL =  new URL('../../', import.meta.url).toString() 
+      const baseURL =  new URL( import.meta.url).origin
+      console.log({baseURL})
       const pathToScript = baseURL+ screen.path.replace(".html", ".dynamizer.mjs");
+      console.log({pathToScript})
       try {
         const dynamizer = await import(pathToScript);
         dynamizer.default.call(this, screenElement);
