@@ -1,0 +1,17 @@
+
+
+#lemonGame-title {
+  font-size: 55px;
+  line-height: 75px;
+}
+
+.menu-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  list-style: none;
+  gap: 10px;
+  padding: 0;
+}
+

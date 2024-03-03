@@ -1,0 +1,38 @@
+menu-button {
+    display: inline-flex;
+    justify-content: center;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--screen-font);
+  font-size: small;
+  background-color: var(--color-screen-medium);
+  color: var(--color-screen-light);
+  width: 200px;
+}
+menu-button:hover,
+menu-button:active,
+menu-button:focus{
+  animation: none;
+  background-color: var(--color-screen-dark);
+  color: var(--color-screen-light);
+}
+
+menu-button[bottom] {
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+}
+
+menu-button[toggle] {
+  padding: 0 5px;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+menu-button[toggle]::before {
+  content: "<  ";
+}
+menu-button[toggle]::after {
+  content: "  >";
+}
+

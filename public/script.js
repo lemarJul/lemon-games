@@ -1,1 +1,1 @@
-import LemonGames from './components/lemon-games/lemon-games.component.mjs'
+import LemonGames from "./lemon-games/components/LemonGames.mjs";

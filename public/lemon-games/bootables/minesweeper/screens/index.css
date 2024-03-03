@@ -1,0 +1,118 @@
+.game-title {
+  width: inherit;
+  height: 100px;
+  font-size: 46px;
+  margin: 40px;
+  margin-bottom: 0;
+  line-height: 55px;
+}
+.menu-title{
+  font-size: 25px;
+  margin: 0;
+  padding: 40px;
+  padding-bottom: 0;
+  line-height: 55px;
+
+}
+
+#MineSweeper h1 {
+
+}
+
+.smile {
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+
+  background-color: #f5bf62;
+  height: 60px;
+  width: 60px;
+  color: #5c6ccd;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: auto;
+  border-width: 0;
+  text-align: center;
+}
+.smile::after {
+  font-size: 40px;
+  content: "😀";
+}
+.smile:active {
+  background-color: var(--orange);
+}
+.smile:active::after {
+  content: "😍";
+}
+
+.button[disabled] {
+  background-color: #818ddf;
+  color: #5c6ccd;
+  cursor: default;
+}
+.button[disabled]:hover {
+  background-color: #818ddf;
+  color: #5c6ccd;
+  cursor: default;
+}
+
+button[disabled] {
+  cursor: default;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+input[type="checkbox"] {
+
+}
+input[type="checkbox"] + label {
+  margin: 0 10px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: small;
+}
+input[type="checkbox"]:checked + label {
+  background-color: var(--light-orange);
+}
+
+.button {
+  font-weight: bold;
+  display: flexbox;
+  /* background-color: #5c6ccd; */
+  color: #fff;
+  border-radius: 10px;
+  border: none;
+  padding: 5px 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.button.call-to-action {
+  color: var(--screen-light);
+  background-color: var(--screen-medium);
+}
+.button.call-to-action:hover {
+  background-color: var(--screen-light);
+  color: var(--screen-dark);
+}
+
+.result {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+button {
+  font-family: var(--screen-font);
+  cursor: pointer;
+}
+
+.setting-icon::after {
+  /* content: "⚙"; */
+}
+.play-icon::after {
+  /* content: "▶"; */
+}
+
+

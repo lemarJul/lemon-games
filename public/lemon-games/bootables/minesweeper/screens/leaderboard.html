@@ -1,0 +1,26 @@
+<h2 class="menu-title">High Scores</h2>
+<div id="leaderboard-toggle" class>
+  <menu-button toggle> Easy </menu-button>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Name</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody id="easy-body"></tbody>
+  <tbody id="medium-body"></tbody>
+  <tbody id="hard-body"></tbody>
+</table>
+
+<menu-button link="MineSweeper" bottom> Exit </menu-button>
+
+<template id="score-template">
+  <tr>
+    <td class="rank"></td>
+    <td class="name"></td>
+    <td class="score"></td>
+  </tr>
+</template>
