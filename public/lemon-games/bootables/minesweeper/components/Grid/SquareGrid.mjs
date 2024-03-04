@@ -60,7 +60,9 @@ export default class SquareGrid extends HTMLElement {
 
     const gameLostHandler = (e) => {
       console.log("You lost!");
-      this.dispatchEvent(new Event("gameStopped", { bubbles: true }));
+      this.dispatchEvent(
+        new Event(SquareGrid.events.stopped, { bubbles: true })
+      );
     };
     this.addEventListener(MineCell.events.exploded, gameLostHandler);
   }
