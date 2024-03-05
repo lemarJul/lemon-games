@@ -1,16 +1,18 @@
 #difficulty-table {
   text-align: initial;
   align-self: center;
-  width: max-content;
+  width: 100%;
   font-size: small;
 }
-#difficulty-table th {
-}
 #difficulty-table tr {
+  text-align: right;
   color: var(--color-screen-medium);
 }
 #difficulty-table tr.active {
   color: var(--color-screen-dark);
+}
+#difficulty-table th {
+  text-align: left;
 }
 
 input[type="radio"] {

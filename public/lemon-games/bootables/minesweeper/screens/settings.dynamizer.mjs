@@ -27,7 +27,7 @@ export default function (screen) {
       const lengthCell = document.createElement("td");
       const nMinesCell = document.createElement("td");
       header.textContent = name.charAt(0).toUpperCase() + name.slice(1);
-      lengthCell.textContent = `${length}x${length}`;
+      lengthCell.textContent = `${length}x${length} grid`;
       nMinesCell.textContent = `${nMines} mines`;
       row.appendChild(header);
       row.appendChild(lengthCell);
