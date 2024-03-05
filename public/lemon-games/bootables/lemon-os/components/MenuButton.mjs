@@ -1,11 +1,11 @@
 import ScreenController from "../../../modules/controllers/ScreenController.mjs";
-import AbstractComponent from "../../../components/AbstractComponent.mjs";
+import AbstractCustomELement from "../../../components/AbstractCustomElement.mjs";
 import {
   canStaticFetchContent,
   canStaticFetchStyle,
 } from "../../../components/ComponentMixins.mjs";
 
-export default class MenuButton extends AbstractComponent {
+export default class MenuButton extends AbstractCustomELement {
   constructor() {
     super();
 

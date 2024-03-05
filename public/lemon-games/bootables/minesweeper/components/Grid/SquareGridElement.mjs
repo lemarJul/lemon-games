@@ -1,4 +1,4 @@
-import CellFactory from "../Cell/CellFactory.mjs";
+import CellElementFactory from "../Cell/CellElementFactory.mjs";
 
 export default class SquareGridElement extends HTMLElement {
   constructor(matrix) {
@@ -16,7 +16,7 @@ export default class SquareGridElement extends HTMLElement {
 
     this._matrix.forEach((row, x) => {
       row.forEach((minesNearBy, y) => {
-        const cell = CellFactory.createCell(x, y, minesNearBy);
+        const cell = CellElementFactory.createCell(x, y, minesNearBy);
         // this._matrix[x][y] = cell;
         this.appendChild(cell);
       });
@@ -45,7 +45,7 @@ export default class SquareGridElement extends HTMLElement {
         );
       }
     };
-    this.addEventListener(CellFactory.events.revealed, checkGridComplete);
+    this.addEventListener(CellElementFactory.events.revealed, checkGridComplete);
 
     const cellRevealedHandler = (e) => {
       if (e.target.hasAdjacentMines) return;
@@ -59,7 +59,7 @@ export default class SquareGridElement extends HTMLElement {
         )
       );
     };
-    this.addEventListener(CellFactory.events.revealed, cellRevealedHandler);
+    this.addEventListener(CellElementFactory.events.revealed, cellRevealedHandler);
 
     const gameLostHandler = (e) => {
       console.log("You lost!");
@@ -67,7 +67,7 @@ export default class SquareGridElement extends HTMLElement {
         new Event(SquareGridElement.events.stopped, { bubbles: true })
       );
     };
-    this.addEventListener(CellFactory.events.exploded, gameLostHandler);
+    this.addEventListener(CellElementFactory.events.exploded, gameLostHandler);
   }
 
   get leftFlags() {
@@ -79,7 +79,7 @@ export default class SquareGridElement extends HTMLElement {
       started: "lg-grid-started",
       complete: "lg-grid-complete",
       stopped: "lg-grid-stopped",
-      ...CellFactory.events,
+      ...CellElementFactory.events,
     };
   }
   static get tag() {

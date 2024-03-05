@@ -8,13 +8,13 @@ import {
   canStaticRegisterFont,
 } from "./ComponentMixins.mjs";
 
-export default class LemonGames extends HTMLElement {
+export default class LemonGamesElement extends HTMLElement {
   constructor(osConstructor = LemonOS) {
     super();
     this._osConstructor = osConstructor;
     this.attachShadow({ mode: "open" });
-    this.shadowRoot.appendChild(LemonGames.style);
-    this.shadowRoot.innerHTML += LemonGames.content;
+    this.shadowRoot.appendChild(LemonGamesElement.style);
+    this.shadowRoot.innerHTML += LemonGamesElement.content;
 
     this.soundController = new SoundController(this.shadowRoot);
     this.screenController = new ScreenController(
@@ -57,12 +57,12 @@ export default class LemonGames extends HTMLElement {
   }
 }
 Object.assign(
-  LemonGames,
+  LemonGamesElement,
   canStaticFetchContent,
   canStaticFetchStyle,
   canStaticRegisterFont
 );
-await LemonGames._fetchContent(import.meta.url);
-await LemonGames._fetchStyle(import.meta.url);
-await LemonGames._registerFont();
-customElements.define("lemon-games", LemonGames);
+await LemonGamesElement._fetchContent(import.meta.url);
+await LemonGamesElement._fetchStyle(import.meta.url);
+await LemonGamesElement._registerFont();
+customElements.define("lemon-games", LemonGamesElement);

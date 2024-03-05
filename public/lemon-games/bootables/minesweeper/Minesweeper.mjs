@@ -1,5 +1,5 @@
 import AbstractExe from "../AbstractExe.mjs";
-import GridFactory from "./components/Grid/GridFactory.mjs";
+import GridElementFactory from "./components/Grid/GridElementFactory.mjs";
 import TimerDisplay from "./modules/TimerDisplay.mjs";
 import FlagCounter from "./modules/FlagCounter.mjs";
 import HTMLElements from "./modules/HtmlElements.mjs";
@@ -64,7 +64,7 @@ export default class MineSweeper extends AbstractExe {
     const oldGrid = gridScreen.querySelector("square-grid");
     const difficulty = this.HTMLElements.difficulty.value;
     const safeCorners = this.HTMLElements.safeCorners.value === "true";
-    const grid = GridFactory.createSquareGrid(difficulty, safeCorners);
+    const grid = GridElementFactory.createSquareGrid(difficulty, safeCorners);
 
     gridScreen.replaceChild(grid, oldGrid);
 

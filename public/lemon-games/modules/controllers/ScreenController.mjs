@@ -1,5 +1,5 @@
 import AbstractController from "./AbstractController.mjs";
-import Screen from "../../components/Screen.mjs";
+import ScreenElement from "../../components/ScreenElement.mjs";
 import MenuButton from "../../bootables/lemon-os/components/MenuButton.mjs";
   //TODO implement enable and disable methods
 
@@ -24,7 +24,7 @@ export default class ScreenController extends AbstractController {
   }
 
   createScreen(screenOptions) {
-    const screen = new Screen(screenOptions)?.hide();
+    const screen = new ScreenElement(screenOptions)?.hide();
     this.wrappedElement.appendChild(screen);
     this.screens[screen.id] = screen;
     this.display[screen.id] = () => (this.activeScreen = screen);

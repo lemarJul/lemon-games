@@ -1,6 +1,6 @@
-import AbstractComponent from "./AbstractComponent.mjs";
+import AbstractCustomELement from "./AbstractCustomElement.mjs";
 
-export default class Screen extends AbstractComponent {
+export default class ScreenElement extends AbstractCustomELement {
   constructor({ name, path, content}) {
     super();
     this.id = name;
@@ -22,13 +22,13 @@ export default class Screen extends AbstractComponent {
 
 
   show() {
-    this.classList.remove(Screen.disabled);
+    this.classList.remove(ScreenElement.disabled);
     return this;
   }
 
   hide() {
-    this.classList.add(Screen.disabled);
+    this.classList.add(ScreenElement.disabled);
     return this;
   }
 }
-customElements.define("lemon-screen", Screen);
+customElements.define("lemon-screen", ScreenElement);

@@ -1,4 +1,4 @@
-import GridFactory from "../components/Grid/GridFactory.mjs";
+import GridFactory from "../components/Grid/GridElementFactory.mjs";
 console.log(GridFactory.difficulties);
 
 export default function (screen) {
