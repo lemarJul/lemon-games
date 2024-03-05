@@ -1,4 +1,3 @@
-import SquareMatrix from "./SquareMatrix.mjs";
 import CellFactory from "../Cell/CellFactory.mjs";
 
 export default class SquareGridElement extends HTMLElement {
@@ -80,6 +79,7 @@ export default class SquareGridElement extends HTMLElement {
       started: "lg-grid-started",
       complete: "lg-grid-complete",
       stopped: "lg-grid-stopped",
+      ...CellFactory.events,
     };
   }
   static get tag() {
