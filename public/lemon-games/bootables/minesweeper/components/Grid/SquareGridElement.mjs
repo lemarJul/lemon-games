@@ -1,7 +1,5 @@
 import SquareMatrix from "./SquareMatrix.mjs";
 import CellFactory from "../Cell/CellFactory.mjs";
-import MineCell from "../Cell/MineCell.mjs";
-import SafeCell from "../Cell/SafeCell.mjs";
 
 export default class SquareGridElement extends HTMLElement {
   constructor(matrix) {
@@ -48,7 +46,7 @@ export default class SquareGridElement extends HTMLElement {
         );
       }
     };
-    this.addEventListener(SafeCell.events.revealed, checkGridComplete);
+    this.addEventListener(CellFactory.events.revealed, checkGridComplete);
 
     const cellRevealedHandler = (e) => {
       if (e.target.hasAdjacentMines) return;
@@ -62,7 +60,7 @@ export default class SquareGridElement extends HTMLElement {
         )
       );
     };
-    this.addEventListener(SafeCell.events.revealed, cellRevealedHandler);
+    this.addEventListener(CellFactory.events.revealed, cellRevealedHandler);
 
     const gameLostHandler = (e) => {
       console.log("You lost!");
@@ -70,7 +68,7 @@ export default class SquareGridElement extends HTMLElement {
         new Event(SquareGridElement.events.stopped, { bubbles: true })
       );
     };
-    this.addEventListener(MineCell.events.exploded, gameLostHandler);
+    this.addEventListener(CellFactory.events.exploded, gameLostHandler);
   }
 
   get leftFlags() {
