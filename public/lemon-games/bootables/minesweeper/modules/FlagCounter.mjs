@@ -1,37 +1,33 @@
-import Cell from "../components/Cell/AbstractCell.mjs";
+import { default as Grid } from "../components/Grid/SquareGridElement.mjs";
 
 export default class FlagCounter {
   constructor(htmlElement) {
     this._htmlElement = htmlElement;
     this._registerEventListeners();
   }
+
+  get countDown() {
+    return this._countDown;
+  }
+
+  set countDown(n) {
+    this._countDown = n;
+    this._htmlElement.innerText = this._formated(n);
+  }
+
   _registerEventListeners() {
     const rootNode = this._htmlElement.getRootNode();
-    rootNode.addEventListener(Cell.events.flagToggled, this._update.bind(this));
+    rootNode.addEventListener(Grid.events.flagToggled, this._update.bind(this));
   }
+
   _update(e) {
     const cell = e.target;
-
     const isFlagged = cell.classList.contains("flagged");
-    if (isFlagged) {
-      this._decrease();
-    } else {
-      this._increase();
-    }
-  }
 
-  _decrease() {
-    this._htmlElement.innerHTML = this._formated(--this._Flags);
-  }
-  _increase() {
-    this._htmlElement.innerHTML = this._formated(++this._Flags);
+    isFlagged ? this.countDown-- : this.countDown++;
   }
 
   _formated(n) {
     return ("00" + n).slice(-2);
-  }
-  setTo(n) {
-    this._Flags = n;
-    this._htmlElement.innerHTML = this._formated(n);
   }
 }

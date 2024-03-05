@@ -68,7 +68,7 @@ export default class MineSweeper extends AbstractExe {
 
     gridScreen.replaceChild(grid, oldGrid);
 
-    this.flagCounter.setTo(grid.nMines);
+    this.flagCounter.countDown = grid.nMines;
     this.timer.reset();
     this.screenController.display.grid();
   }
