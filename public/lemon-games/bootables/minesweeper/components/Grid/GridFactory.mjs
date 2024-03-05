@@ -1,4 +1,4 @@
-import SquareGrid from "./SquareGrid.mjs";
+import SquareGridElement from "./SquareGridElement.mjs";
 import SquareMatrix from "./SquareMatrix.mjs";
 
 export default class GridFactory {
@@ -14,7 +14,7 @@ export default class GridFactory {
     this._validateDifficulty(difficulty);
     const params = { ...this.difficulties[difficulty], safeCorners };
     const matrix = new SquareMatrix(params);
-    return new SquareGrid(matrix);
+    return new SquareGridElement(matrix);
   }
 
   static _validateDifficulty(difficulty) {

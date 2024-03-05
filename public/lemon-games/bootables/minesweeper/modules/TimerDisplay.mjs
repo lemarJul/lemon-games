@@ -1,4 +1,4 @@
-import SquareGrid from "../components/Grid/SquareGrid.mjs";
+import SquareGrid from "../components/Grid/SquareGridElement.mjs";
 
 export default class TimerDisplay {
   constructor(HTMLElement) {

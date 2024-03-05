@@ -3,7 +3,7 @@ import CellFactory from "../Cell/CellFactory.mjs";
 import MineCell from "../Cell/MineCell.mjs";
 import SafeCell from "../Cell/SafeCell.mjs";
 
-export default class SquareGrid extends HTMLElement {
+export default class SquareGridElement extends HTMLElement {
   constructor(matrix) {
     super();
     this._matrix = matrix;
@@ -34,7 +34,7 @@ export default class SquareGrid extends HTMLElement {
     const gameStartedHandler = (e) => {
       console.log("Game started!");
       this.dispatchEvent(
-        new Event(SquareGrid.events.started, { bubbles: true })
+        new Event(SquareGridElement.events.started, { bubbles: true })
       );
     };
     this.addEventListener("click", gameStartedHandler, { once: true });
@@ -44,7 +44,7 @@ export default class SquareGrid extends HTMLElement {
 
       if (isGridComplete) {
         this.dispatchEvent(
-          new Event(SquareGrid.events.complete, { bubbles: true })
+          new Event(SquareGridElement.events.complete, { bubbles: true })
         );
       }
     };
@@ -67,7 +67,7 @@ export default class SquareGrid extends HTMLElement {
     const gameLostHandler = (e) => {
       console.log("You lost!");
       this.dispatchEvent(
-        new Event(SquareGrid.events.stopped, { bubbles: true })
+        new Event(SquareGridElement.events.stopped, { bubbles: true })
       );
     };
     this.addEventListener(MineCell.events.exploded, gameLostHandler);
@@ -89,6 +89,6 @@ export default class SquareGrid extends HTMLElement {
   }
 }
 
-if (!customElements.get(SquareGrid.tag)) {
-  customElements.define(SquareGrid.tag, SquareGrid);
+if (!customElements.get(SquareGridElement.tag)) {
+  customElements.define(SquareGridElement.tag, SquareGridElement);
 }
