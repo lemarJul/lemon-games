@@ -6,7 +6,8 @@ export default class FlagCounter {
     this._registerEventListeners();
   }
   _registerEventListeners() {
-    document.addEventListener(Cell.events.flagToggled, this._update.bind(this));
+    const rootNode = this._htmlElement.getRootNode();
+    rootNode.addEventListener(Cell.events.flagToggled, this._update.bind(this));
   }
   _update(e) {
     const cell = e.target;
