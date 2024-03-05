@@ -4,12 +4,12 @@ import MineCell from "../Cell/MineCell.mjs";
 import SafeCell from "../Cell/SafeCell.mjs";
 
 export default class SquareGrid extends HTMLElement {
-  constructor({ length, nMines }, safeCorners = true) {
+  constructor(matrix) {
     super();
-    this.nMines = nMines;
-    this.safeCellsToRevealed = length * length - nMines;
+    this._matrix = matrix;
+    this.nMines = matrix.nMines;
+    this.safeCellsToRevealed = matrix.safeCellsCount;
 
-    this._matrix = new SquareMatrix({ length, nMines, safeCorners });
     this._renderGrid();
     this._registerEventListeners();
   }
@@ -20,10 +20,14 @@ export default class SquareGrid extends HTMLElement {
     this._matrix.forEach((row, x) => {
       row.forEach((minesNearBy, y) => {
         const cell = CellFactory.createCell(x, y, minesNearBy);
-        this._matrix[x][y] = cell;
+        // this._matrix[x][y] = cell;
         this.appendChild(cell);
       });
     });
+  }
+  cellElement(x, y) {
+    const childPosition = x * this._matrix.length + y;
+    return this.children[childPosition];
   }
 
   _registerEventListeners() {
@@ -53,7 +57,9 @@ export default class SquareGrid extends HTMLElement {
       const adjacentPositions = this._matrix.getAdjacentPositions(x, y);
 
       adjacentPositions.forEach(([x, y]) =>
-        this._matrix[x][y].dispatchEvent(new Event("click", { bubbles: true }))
+        this.cellElement(x, y).dispatchEvent(
+          new Event("click", { bubbles: true })
+        )
       );
     };
     this.addEventListener(SafeCell.events.revealed, cellRevealedHandler);

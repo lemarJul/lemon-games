@@ -1,5 +1,5 @@
-import SquareGrid from "./SquareGrid.mjs"
-
+import SquareGrid from "./SquareGrid.mjs";
+import SquareMatrix from "./SquareMatrix.mjs";
 
 export default class GridFactory {
   static difficulties = {
@@ -10,14 +10,18 @@ export default class GridFactory {
     hard: { length: 16, nMines: 50 },
   };
 
-  static createSquareGrid(difficulty, safeCorners) {
-    if (!(difficulty in this.difficulties)) {
-      const difficulties = Object.keys(this.difficulties).join(", ");
-      throw new Error(
-        `Invalid difficulty "${difficulty}": must be one of ${difficulties}`
-      );
-    }
+  static createSquareGrid(difficulty, safeCorners = true) {
+    this._validateDifficulty(difficulty);
+    const params = { ...this.difficulties[difficulty], safeCorners };
+    const matrix = new SquareMatrix(params);
+    return new SquareGrid(matrix);
+  }
 
-    return new SquareGrid(this.difficulties[difficulty], safeCorners);
+  static _validateDifficulty(difficulty) {
+    if (difficulty in this.difficulties) return;
+    const difficulties = Object.keys(this.difficulties).join(", ");
+    throw new Error(
+      `Invalid difficulty "${difficulty}": must be one of ${difficulties}`
+    );
   }
 }
