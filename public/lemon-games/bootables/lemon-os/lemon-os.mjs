@@ -3,8 +3,9 @@ import MineSweeper from "../minesweeper/Minesweeper.mjs";
 import Snake from "../snake/Snake.mjs";
 import BrickBreaker from "../brickbreacker/BrickBreaker.mjs";
 import MenuButton from "./components/MenuButton.mjs";
+import ScreenElementFactory from "../../components/ScreenElementFactory.mjs";
 
-import * as Screens from "./screens/index.mjs";
+import * as screenComponents from "./screens/index.mjs";
 
 export default class LemonOS extends AbstractExe {
   constructor(
@@ -17,6 +18,8 @@ export default class LemonOS extends AbstractExe {
       buttonController,
       screenController,
     });
+    this.screenElementFactory = new ScreenElementFactory(this);
+    this._loadScreenComponents();
     this._setupLaunchScreen();
     this._loadGames(gamesList);
     //load views
@@ -57,24 +60,32 @@ export default class LemonOS extends AbstractExe {
 
   static dirPath = new URL(".", import.meta.url).pathname;
   static screens = [
-    {
-      name: "launch",
-      path: this.dirPath + "screens/launch.html",
-      script: true,
-    },
-    {
-      name: "mainMenu",
-      path: this.dirPath + "screens/menu.html",
-      script: true,
-    },
-    {
-      name: "credits",
-      path: this.dirPath + "screens/credits.html",
-      script: true,
-    },
+    // {
+    //   name: "launch",
+    //   path: this.dirPath + "screens/launch.html",
+    //   script: true,
+    // },
+    // {
+    //   name: "mainMenu",
+    //   path: this.dirPath + "screens/menu.html",
+    //   script: true,
+    // },
+    // {
+    //   name: "credits",
+    //   path: this.dirPath + "screens/credits.html",
+    //   script: true,
+    // },
   ];
 
-  // static style = "lemon-os/screens/lemon-os.css";
+  // static screenModules = [creditScreen];
+
+  async _loadScreenComponents() {
+    Object.values(screenComponents).forEach(async (module) => {
+      const screenElement =
+        await this.screenElementFactory.createScreenFromModule(module);
+      this.screenController.addScreenElementToDOM(screenElement);
+    });
+  }
 
   // todo: turn this to Array with objects with properties name, path, controlMapping, soundMapping, scriptMapping
 
@@ -111,4 +122,4 @@ export default class LemonOS extends AbstractExe {
     ].forEach((controller) => controller.disable());
   }
 }
-await LemonOS.initialize()
+await LemonOS.initialize();

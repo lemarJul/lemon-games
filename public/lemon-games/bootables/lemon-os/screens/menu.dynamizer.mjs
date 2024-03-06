@@ -1,6 +1,7 @@
+export const path = import.meta.url;
 
+export const createConnectedCallback = (Manager) => {
+  return function () {};
+};
 
-export default function (screen) {
-}
-
-export  const path = import.meta.url
+export const name = "mainMenu";

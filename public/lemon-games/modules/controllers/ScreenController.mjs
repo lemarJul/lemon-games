@@ -1,6 +1,6 @@
 import AbstractController from "./AbstractController.mjs";
 import ScreenElement from "../../components/ScreenElement.mjs";
-  //TODO implement enable and disable methods
+//TODO implement enable and disable methods
 
 export default class ScreenController extends AbstractController {
   constructor(HTMLElement) {
@@ -29,8 +29,13 @@ export default class ScreenController extends AbstractController {
     this.display[screen.id] = () => (this.activeScreen = screen);
     return screen;
   }
+  addScreenElementToDOM(screen) {
+    screen.hide();
+    this.wrappedElement.appendChild(screen);
+    this.screens[screen.id] = screen;
+    this.display[screen.id] = () => (this.activeScreen = screen);
+  }
 
-  
   enable() {
     this.display[this._launchScreenId]();
   }
