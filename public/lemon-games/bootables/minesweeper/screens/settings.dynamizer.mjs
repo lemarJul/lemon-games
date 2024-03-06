@@ -1,5 +1,4 @@
 import GridFactory from "../components/Grid/GridElementFactory.mjs";
-console.log(GridFactory.difficulties);
 
 export default function (screen) {
   const difficultyToggle = screen.querySelector("#difficultyToggle");
