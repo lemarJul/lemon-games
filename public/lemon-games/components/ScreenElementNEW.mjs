@@ -3,10 +3,6 @@ import AbstractCustomELement from "./AbstractCustomElement.mjs";
 export default class ScreenElementNEW extends AbstractCustomELement {
   constructor(name, content, style, script) {
     super();
-    console.log("name: " + name);
-    console.log("content: " + content);
-    console.log("style: " + style);
-    console.log("script: " + script);
     this.id = name;
     this.appendChild(style);
     this.innerHTML += content;

@@ -28,7 +28,6 @@ export default class ScreenElementFactory {
       module.createConnectedCallback(this.manager) || (() => {});
 
     const screen = new ScreenElement(id, content, link, connectedCallback);
-    console.log("screen: " + screen);
     return screen;
   }
 }
