@@ -2,6 +2,7 @@ import AbstractExe from "../AbstractExe.mjs";
 import MineSweeper from "../minesweeper/Minesweeper.mjs";
 import Snake from "../snake/Snake.mjs";
 import BrickBreaker from "../brickbreacker/BrickBreaker.mjs";
+import MenuButton from "./components/MenuButton.mjs";
 
 import * as Screens from "./screens/index.mjs";
 
