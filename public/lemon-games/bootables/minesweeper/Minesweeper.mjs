@@ -9,7 +9,7 @@ export default class MineSweeper extends AbstractExe {
   static screens = [
     {
       name: "MineSweeper",
-      path: this.dirPath + "screens/index.html",
+      path: this.dirPath + "screens/menu.html",
       script: true,
     },
     {
