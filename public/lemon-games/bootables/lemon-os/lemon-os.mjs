@@ -47,37 +47,13 @@ export default class LemonOS extends AbstractExe {
     console.log(this.constructor.name, " - is ready");
   }
   _setupLaunchScreen() {
-    const launchScreen = LemonOS.screens.find(
-      (screen) => screen.name === "launch"
-    );
-    this.screenController.launchScreen = "launch";
+    this.screenController.launchScreen = "lemonos-launch";
   }
   _loadGames(gamesList) {
     gamesList.forEach((game) => {
       this.loadGame(game);
     });
   }
-
-  static dirPath = new URL(".", import.meta.url).pathname;
-  static screens = [
-    // {
-    //   name: "launch",
-    //   path: this.dirPath + "screens/launch.html",
-    //   script: true,
-    // },
-    // {
-    //   name: "mainMenu",
-    //   path: this.dirPath + "screens/menu.html",
-    //   script: true,
-    // },
-    // {
-    //   name: "credits",
-    //   path: this.dirPath + "screens/credits.html",
-    //   script: true,
-    // },
-  ];
-
-  // static screenModules = [creditScreen];
 
   async _loadScreenComponents() {
     Object.values(screenComponents).forEach(async (module) => {
