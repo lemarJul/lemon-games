@@ -5,7 +5,8 @@ export const createConnectedCallback = (manager) => {
     const displayNextScreen = () => {
       manager.soundController.play.start();
       setTimeout(() => {
-        manager.screenController.display.mainMenu();
+        const nextScreenId = manager.name.toLowerCase() + "-mainMenu";
+        manager.screenController.display[nextScreenId]();
       }, 3000);
     };
 

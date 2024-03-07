@@ -10,8 +10,10 @@ export default class ScreenElementFactory {
     if (!modulePath) {
       throw new Error("Module path not found");
     }
-    const id =
+    //id
+    const name =
       module?.name || modulePath.split("/").pop().replace(".dynamizer.mjs", "");
+    const id = this.manager.name.toLowerCase() + "-" + name;
     //content
     const contentPath = modulePath.replace(".dynamizer.mjs", ".html");
     const content = await fetch(contentPath).then((response) =>
