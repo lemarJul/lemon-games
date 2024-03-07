@@ -65,4 +65,7 @@ Object.assign(
 await LemonGamesElement._fetchContent(import.meta.url);
 await LemonGamesElement._fetchStyle(import.meta.url);
 await LemonGamesElement._registerFont();
-customElements.define("lemon-games", LemonGamesElement);
+
+if (!customElements.get("lemon-games")) {
+  customElements.define("lemon-games", LemonGamesElement);
+}
