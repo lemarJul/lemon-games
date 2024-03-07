@@ -19,7 +19,7 @@ export default class LemonOS extends AbstractExe {
       screenController,
     });
     this.screenElementFactory = new ScreenElementFactory(this);
-    this._loadScreenComponents();
+    this._loadScreenComponents(screenComponents);
     this._setupLaunchScreen();
     this._loadGames(gamesList);
     //load views
@@ -52,14 +52,6 @@ export default class LemonOS extends AbstractExe {
   _loadGames(gamesList) {
     gamesList.forEach((game) => {
       this.loadGame(game);
-    });
-  }
-
-  async _loadScreenComponents() {
-    Object.values(screenComponents).forEach(async (module) => {
-      const screenElement =
-        await this.screenElementFactory.createScreenFromModule(module);
-      this.screenController.addScreenElementToDOM(screenElement);
     });
   }
 

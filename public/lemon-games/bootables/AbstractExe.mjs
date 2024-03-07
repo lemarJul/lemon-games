@@ -1,4 +1,4 @@
-import DataController from "../modules/controllers/DataController.mjs"
+import DataController from "../modules/controllers/DataController.mjs";
 
 export default class AbstractExe {
   constructor({ name, soundController, buttonController, screenController }) {
@@ -36,8 +36,9 @@ export default class AbstractExe {
 
       if (!screen.script) return;
 
-      const baseURL =  new URL( import.meta.url).origin
-      const pathToScript = baseURL+ screen.path.replace(".html", ".dynamizer.mjs");
+      const baseURL = new URL(import.meta.url).origin;
+      const pathToScript =
+        baseURL + screen.path.replace(".html", ".dynamizer.mjs");
       try {
         const dynamizer = await import(pathToScript);
         dynamizer.default.call(this, screenElement);
@@ -51,6 +52,14 @@ export default class AbstractExe {
     };
 
     screens.forEach(loadSingleScreen);
+  }
+  
+  async _loadScreenComponents(screenComponents) {
+    Object.values(screenComponents).forEach(async (module) => {
+      const screenElement =
+        await this.screenElementFactory.createScreenFromModule(module);
+      this.screenController.addScreenElementToDOM(screenElement);
+    });
   }
 
   //* STATIC VARIABLES
