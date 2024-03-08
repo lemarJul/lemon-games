@@ -8,10 +8,6 @@ import {
 export default class MenuButton extends AbstractCustomELement {
   constructor() {
     super();
-
-    // this.attachShadow({ mode: "open" });
-    // this.shadowRoot.appendChild(MenuButton.style);
-    // this.shadowRoot.innerHTML += MenuButton.content;
     this._registerEventListeners();
   }
   connectedCallback() {
@@ -36,8 +32,4 @@ export default class MenuButton extends AbstractCustomELement {
     return "menu-button";
   }
 }
-// Object.assign(MenuButton, StaticContentFetchable, StaticStyleFetchable);
-// await MenuButton._fetchStyle(import.meta.url);
-// await MenuButton._fetchContent(import.meta.url);
-
-customElements.define(MenuButton.tag, MenuButton);
+MenuButton.defineSelfOnce();
