@@ -23,4 +23,11 @@ export default class AbstractCustomELement extends HTMLElement {
       console.error("Error loading CSS:", error);
     }
   }
+
+  static defineSelfOnce(fn = () => {}) {
+    if (!customElements.get(this.tag)) {
+      customElements.define(this.tag, this);
+      fn();
+    }
+  }
 }
