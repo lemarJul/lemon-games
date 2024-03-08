@@ -30,5 +30,8 @@ export default class ScreenElement extends AbstractCustomELement {
     this.classList.add(ScreenElement.disabled);
     return this;
   }
+  static get tag() {
+    return "lemon-screen";
+  }
 }
-customElements.define("lemon-screen", ScreenElement);
+ScreenElement.defineSelfOnce();

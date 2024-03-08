@@ -3,14 +3,13 @@ import MineSweeper from "../minesweeper/Minesweeper.mjs";
 import Snake from "../snake/Snake.mjs";
 import BrickBreaker from "../brickbreacker/BrickBreaker.mjs";
 import MenuButton from "./components/MenuButton.mjs";
-import ScreenElementFactory from "../../components/ScreenElementFactory.mjs";
 
-import * as screenComponents from "./screens/index.mjs";
+import * as screenComponentsFactoryFns from "./screens/index.mjs";
 
 export default class LemonOS extends AbstractExe {
   constructor(
     { soundController, buttonController, screenController },
-    gamesList = [MineSweeper]
+    games = [MineSweeper]
   ) {
     super({
       name: "LemonOS",
@@ -18,11 +17,10 @@ export default class LemonOS extends AbstractExe {
       buttonController,
       screenController,
     });
-    this.screenElementFactory = new ScreenElementFactory(this);
-    this._loadScreenComponents(screenComponents);
-    this._setupLaunchScreen();
-    this._loadGames(gamesList);
-    //load views
+    this.games = games;
+
+    this._renderScreenComponents(screenComponentsFactoryFns);
+
 
     // setup buttons
     this.buttonMapping = {
@@ -46,19 +44,22 @@ export default class LemonOS extends AbstractExe {
 
     console.log(this.constructor.name, " - is ready");
   }
-  _setupLaunchScreen() {
-    this.screenController.launchScreen = "lemonos-launch";
+  _renderScreenComponents(factoryFns) {
+    Object.values(factoryFns).forEach(async (createScreen) => {
+      const screen = await createScreen(this);
+      this.screenController.addScreenElementToDOM(screen);
+    });
   }
-  _loadGames(gamesList) {
-    gamesList.forEach((game) => {
-      this.loadGame(game);
+
+  _loadGames() {
+    this.games.forEach((game) => {
+      this._loadSingleGame(game);
     });
   }
 
   // todo: turn this to Array with objects with properties name, path, controlMapping, soundMapping, scriptMapping
 
-  async loadGame(Game) {
-    await Game.initialize();
+  async _loadSingleGame(Game) {
     const game = new Game(this);
 
     this.updateGameList(game);
@@ -70,7 +71,9 @@ export default class LemonOS extends AbstractExe {
       this.screenController.wrappedElement.querySelector("#games-list");
     const button = document.createElement("menu-button");
     button.innerHTML = game.name;
-    button.setAttribute("link", game.name);
+    button.addEventListener("click", () => {
+      game.boot();
+    });
     gameList.appendChild(button);
   }
 
@@ -90,4 +93,4 @@ export default class LemonOS extends AbstractExe {
     ].forEach((controller) => controller.disable());
   }
 }
-await LemonOS.initialize();
+// await LemonOS.initialize();

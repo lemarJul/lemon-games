@@ -1,5 +1,3 @@
-export * as launchScreen from "./launch.dynamizer.mjs";
-export * as creditScreen from "./credits.dynamizer.mjs";
-export * as menuScreen from "./menu.dynamizer.mjs";
-
-
+export { default as launchScree } from "./launch.dynamizer.mjs";
+export { default as creditScreen } from "./credits.dynamizer.mjs";
+export { default as menuScreen } from "./menu.dynamizer.mjs";

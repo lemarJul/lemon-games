@@ -1,15 +1,17 @@
 import SquareGridElement from "./SquareGridElement.mjs";
 import SquareMatrix from "./SquareMatrix.mjs";
 
+export const difficulties = {
+  // rows, cols, mines
+  // test: { length: 5, nMines: 2 },
+  easy: { length: 8, nMines: 10 },
+  medium: { length: 12, nMines: 25 },
+  hard: { length: 16, nMines: 50 },
+};
+
 export default class GridFactory {
   static get difficulties() {
-    return {
-      // rows, cols, mines
-      // test: { length: 5, nMines: 2 },
-      easy: { length: 8, nMines: 10 },
-      medium: { length: 12, nMines: 25 },
-      hard: { length: 16, nMines: 50 },
-    };
+    return difficulties;
   }
 
   static createSquareGrid(difficulty, safeCorners = true) {

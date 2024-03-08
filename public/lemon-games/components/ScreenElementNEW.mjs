@@ -1,18 +1,36 @@
 import AbstractCustomELement from "./AbstractCustomElement.mjs";
 
 export default class ScreenElementNEW extends AbstractCustomELement {
-  constructor(name, content, style, script) {
+  constructor(id, content, style, initializerFn) {
     super();
-    this.id = name;
+    this.id = id;
     this.appendChild(style);
     this.innerHTML += content;
-    this._dynamizer = script;
+    this._init = initializerFn;
   }
-  static disabled = "disabled-screen";
+  get name() {
+    const toCamelCase = (str) => {
+      return str.toLowerCase().replace(/-([a-z])/g, function (g) {
+        return g[1].toUpperCase();
+      });
+    };
+    return toCamelCase(this.id);
+  }
 
   connectedCallback() {
     this._linkClassStyleOnce(import.meta.url);
-    this._dynamizer.call(this);
+    this._init();
+  }
+
+  onSelfShown(fn) {
+    new IntersectionObserver(
+      function (entries) {
+        if (entries[0].isIntersecting === true) {
+          fn();
+        }
+      },
+      { threshold: [0] }
+    ).observe(this);
   }
 
   show() {
@@ -27,7 +45,6 @@ export default class ScreenElementNEW extends AbstractCustomELement {
   static get tag() {
     return "lemon-screen-new";
   }
+  static disabled = "disabled-screen";
 }
-if (!customElements.get(ScreenElementNEW.tag)) {
-  customElements.define(ScreenElementNEW.tag, ScreenElementNEW);
-}
+ScreenElementNEW.defineSelfOnce();

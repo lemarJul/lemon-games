@@ -1,9 +1,22 @@
-export default function (screen) {
-  const resumeButton = screen.querySelector("#resume-button");
+export default async (manager) => {
+  const screen = await manager.screenElementFactory.createScreenFromPath(
+    import.meta.url,
+    {
+      init: function init() {
+        initResumeButton();
+      },
+    }
+  );
+  return screen;
 
-  const resumeGame = () => {
-      this.screenController.display.grid();
-      this.timer.run();
-  };
-  resumeButton.addEventListener("click", resumeGame);
-}
+  function initResumeButton() {
+    const resumeButton = screen.querySelector("#resume-button");
+
+    const resumeGame = () => {
+      manager.screenController.display.minesweeperGrid();
+      manager.timer.run();
+    };
+    resumeButton.addEventListener("click", resumeGame);
+  }
+
+};

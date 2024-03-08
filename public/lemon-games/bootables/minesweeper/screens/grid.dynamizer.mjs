@@ -1,20 +1,38 @@
 import SquareGrid from "../components/Grid/SquareGridElement.mjs";
 
-export default function (screen) {
-  screen.addEventListener(SquareGrid.events.complete, () => {
-    this.screenController.display.win();
-    this.timer.stop();
-  });
+export default async (manager) => {
+  const screen = await manager.screenElementFactory.createScreenFromPath(
+    import.meta.url,
+    {
+      init: function init() {
+        initGridWin();
+        initGridFail();
+        initStartButton();
+      },
+    }
+  );
+  return screen;
 
-  screen.addEventListener(SquareGrid.events.stopped, () => {
-    this.soundController.play.boom();
-    setTimeout(() => {
-      this.screenController.display.fail();
-    }, 1500);
-  });
+  function initGridWin() {
+    screen.addEventListener(SquareGrid.events.complete, () => {
+      manager.screenController.display.minesweeperWin();
+      manager.timer.stop();
+    });
+  }
 
-  this.buttonController.startButton.addEventListener("click", () => {
-    this.timer.stop();
-    this.screenController.display.paused();
-  });
-}
+  function initGridFail() {
+    screen.addEventListener(SquareGrid.events.stopped, () => {
+      manager.soundController.play.boom();
+      setTimeout(() => {
+        manager.screenController.display.minesweeperFail();
+      }, 1500);
+    });
+  }
+
+  function initStartButton() {
+    manager.buttonController.startButton.addEventListener("click", () => {
+      manager.timer.stop();
+      manager.screenController.display.minesweeperPaused();
+    });
+  }
+};

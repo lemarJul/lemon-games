@@ -7,7 +7,7 @@ export default class ScreenController extends AbstractController {
     super(HTMLElement);
     this.screens = {};
     this.display = {};
-    this._launchScreenId = null;
+    this.bootScreen = null;
     this._activeScreen = null;
     this._registerEventListeners();
   }
@@ -18,37 +18,36 @@ export default class ScreenController extends AbstractController {
     screen.show();
     this._activeScreen = screen;
   }
-  set launchScreen(screenId) {
-    this._launchScreenId = screenId;
-  }
 
-  createScreen(screenOptions) {
-    const screen = new ScreenElement(screenOptions)?.hide();
-    this.wrappedElement.appendChild(screen);
-    this.screens[screen.id] = screen;
-    this.display[screen.id] = () => (this.activeScreen = screen);
-    return screen;
-  }
+  // createScreen(screenOptions) {
+  //   const screen = new ScreenElement(screenOptions)?.hide();
+  //   this.wrappedElement.appendChild(screen);
+  //   this.screens[screen.id] = screen;
+  //   this.display[screen.id] = () => (this.activeScreen = screen);
+  //   return screen;
+  // }
   addScreenElementToDOM(screen) {
     screen.hide();
+
     this.wrappedElement.appendChild(screen);
-    this.screens[screen.id] = screen;
-    this.display[screen.id] = () => (this.activeScreen = screen);
+    this.screens[screen.name] = screen;
+    this.display[screen.name] = () => (this.activeScreen = screen);
   }
 
   enable() {
-    this.display[this._launchScreenId]();
+    const bootScreen = this.bootScreen || Object.values(this.screens)[0];
+    this.activeScreen = bootScreen;
   }
   disable() {
     for (let screen in this.screens) {
       this.screens[screen].hide();
     }
   }
-  getScreenFromUrl(url) {
-    const screenName = url.split("/").pop().replace(".mjs", "");
-    const screen = this.screens[screenName];
-    return screen;
-  }
+  // getScreenFromUrl(url) {
+  //   const screenName = url.split("/").pop().replace(".mjs", "");
+  //   const screen = this.screens[screenName];
+  //   return screen;
+  // }
 
   static Events = {
     showScreen: new Event("showScreen", { bubbles: true }),

@@ -2,25 +2,25 @@
   width: 100%;
 } */
 
-#leaderboard table {
+#minesweeper-leaderboard table {
   padding: 0 25px;
 }
-#leaderboard tbody {
+#minesweeper-leaderboard tbody {
   height: 240px;
   width: 100%;
 }
-#leaderboard th:nth-of-type(2) {
+#minesweeper-leaderboard th:nth-of-type(2) {
   width: 450px;
 }
 
-#leaderboard tbody.disabled {
+#minesweeper-leaderboard tbody.disabled {
   display: none;
 }
-#leaderboard tr {
+#minesweeper-leaderboard tr {
   border-bottom: 1px dotted var(--color-screen-dark);
 }
 
-#leaderboard thead {
+#minesweeper-leaderboard thead {
   color: var(--color-screen-medium);
   font-size: small;
 }

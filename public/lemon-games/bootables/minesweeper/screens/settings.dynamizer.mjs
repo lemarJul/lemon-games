@@ -1,39 +1,26 @@
-import GridFactory from "../components/Grid/GridElementFactory.mjs";
+import { difficulties } from "../components/Grid/GridElementFactory.mjs";
 
-export default function (screen) {
-  const difficultyToggle = screen.querySelector("#difficultyToggle");
-  const safeCornersToggle = screen.querySelector("#safeCornersToggle");
-  const radioOn = screen.querySelector("#safeCornersOn");
-  const radioOff = screen.querySelector("#safeCornersOff");
-  const difficultySelect = screen.querySelector("#difficulty-select");
-  const difficultyBody = screen.querySelector("#difficulty-table tbody");
+export default async (manager) => {
+  const screen = await manager.screenElementFactory.createScreenFromPath(
+    import.meta.url,
+    {
+      init: function init() {
+        renderDifficulty(difficulties);
+        difficultyToggle.addEventListener("click", toggleDifficulty);
+        safeCornersToggle.addEventListener("click", toggleSafeCorners);
+      },
+    }
+  );
+  const difficultyToggle = screen.querySelector("#difficultyToggle"),
+    safeCornersToggle = screen.querySelector("#safeCornersToggle"),
+    radioOn = screen.querySelector("#safeCornersOn"),
+    radioOff = screen.querySelector("#safeCornersOff"),
+    difficultySelect = screen.querySelector("#difficulty-select"),
+    difficultyBody = screen.querySelector("#difficulty-table tbody");
 
-  renderDifficulty(GridFactory.difficulties);
-  difficultyToggle.addEventListener("click", toggleDifficulty);
-  safeCornersToggle.addEventListener("click", toggleSafeCorners);
+  return screen;
 
   function renderDifficulty(difficulties) {
-    const addOption = (name) => {
-      const option = document.createElement("option");
-      option.value = name;
-      option.id = name;
-      option.textContent = name.charAt(0).toUpperCase() + name.slice(1);
-      difficultySelect.appendChild(option);
-    };
-    const addTableRow = (name, { length, nMines }) => {
-      const row = document.createElement("tr");
-      const header = document.createElement("th");
-      const lengthCell = document.createElement("td");
-      const nMinesCell = document.createElement("td");
-      header.textContent = name.charAt(0).toUpperCase() + name.slice(1);
-      lengthCell.textContent = `${length}x${length} grid`;
-      nMinesCell.textContent = `${nMines} mines`;
-      row.appendChild(header);
-      row.appendChild(lengthCell);
-      row.appendChild(nMinesCell);
-      difficultyBody.appendChild(row);
-    };
-
     Object.entries(difficulties).forEach(([name, { length, nMines }], i) => {
       addOption(name);
       addTableRow(name, { length, nMines });
@@ -42,6 +29,27 @@ export default function (screen) {
         difficultyBody.querySelector("tr").classList.add("active");
       }
     });
+  }
+  function addOption(name) {
+    const option = document.createElement("option");
+    option.value = name;
+    option.id = name;
+    option.textContent = name.charAt(0).toUpperCase() + name.slice(1);
+    difficultySelect.appendChild(option);
+  }
+  function addTableRow(name, { length, nMines }) {
+    const row = document.createElement("tr"),
+      header = document.createElement("th"),
+      lengthCell = document.createElement("td"),
+      nMinesCell = document.createElement("td");
+
+    header.textContent = name.charAt(0).toUpperCase() + name.slice(1);
+    lengthCell.textContent = `${length}x${length} grid`;
+    nMinesCell.textContent = `${nMines} mines`;
+    row.appendChild(header);
+    row.appendChild(lengthCell);
+    row.appendChild(nMinesCell);
+    difficultyBody.appendChild(row);
   }
 
   function toggleSafeCorners() {
@@ -61,4 +69,4 @@ export default function (screen) {
       }
     });
   }
-}
+};

@@ -1,22 +1,20 @@
-export const path = import.meta.url;
-
-export const createConnectedCallback = (manager) => {
-  return function () {
-    const displayNextScreen = () => {
-      manager.soundController.play.start();
-      setTimeout(() => {
-        const nextScreenId = manager.name.toLowerCase() + "-mainMenu";
-        manager.screenController.display[nextScreenId]();
-      }, 3000);
-    };
-
-    new IntersectionObserver(
-      function (entries) {
-        if (entries[0].isIntersecting === true) {
-          displayNextScreen();
-        }
+export default async (manager) => {
+  const screen = await manager.screenElementFactory.createScreenFromPath(
+    import.meta.url,
+    {
+      init: function init() {
+        console.log("init", this);
+        manager.screenController.bootScreen = screen;
+        screen.onSelfShown(AnimateToNextScreen);
       },
-      { threshold: [0] }
-    ).observe(this);
-  };
+    }
+  );
+  return screen;
+
+  function AnimateToNextScreen() {
+    manager.soundController.play.start();
+    setTimeout(() => {
+      manager.screenController.display.lemonosMenu();
+    }, 3000);
+  }
 };

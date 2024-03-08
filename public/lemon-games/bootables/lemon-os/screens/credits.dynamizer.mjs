@@ -1,13 +1,12 @@
-export const path = import.meta.url;
-
-export const createConnectedCallback = (manager) => {
-  return function () {
-    const creditsContent = this.querySelector("#creditsContent"); 
-    creditsContent.innerHTML += creditsContent.innerHTML; 
-
-  };
+export default async (manager) => {
+  const screen = await manager.screenElementFactory.createScreenFromPath(
+    import.meta.url,
+    {
+      init: function init() {
+        const creditsContent = screen.querySelector("#creditsContent");
+        creditsContent.innerHTML += creditsContent.innerHTML;
+      },
+    }
+  );
+  return screen;
 };
-
-
-
-

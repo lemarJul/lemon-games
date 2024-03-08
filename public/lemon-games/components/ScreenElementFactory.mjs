@@ -5,31 +5,27 @@ export default class ScreenElementFactory {
     this.manager = manager;
   }
 
-  async createScreenFromModule(module) {
-    const modulePath = module.path;
-    if (!modulePath) {
-      throw new Error("Module path not found");
-    }
+  async createScreenFromPath(path, { init = () => {} } = {}) {
+    const modulePath = path;
+    const pathWith = (ext) => modulePath.replace(".dynamizer.mjs", ext);
+
     //id
-    const name =
-      module?.name || modulePath.split("/").pop().replace(".dynamizer.mjs", "");
-    const id = this.manager.name.toLowerCase() + "-" + name;
+    const managerName = this.manager.name.toLowerCase();
+    const screenName = pathWith("").split("/").pop();
+    const id = managerName + "-" + screenName;
     //content
-    const contentPath = modulePath.replace(".dynamizer.mjs", ".html");
-    const content = await fetch(contentPath).then((response) =>
+    const content = await fetch(pathWith(".html")).then((response) =>
       response.text()
     );
     //style
-    const stylePath = modulePath.replace(".dynamizer.mjs", ".css");
+
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = stylePath;
+    link.href = pathWith(".css");
     //script
 
-    const connectedCallback =
-      module.createConnectedCallback(this.manager) || (() => {});
+    const screen = new ScreenElement(id, content, link, init);
 
-    const screen = new ScreenElement(id, content, link, connectedCallback);
     return screen;
   }
 }

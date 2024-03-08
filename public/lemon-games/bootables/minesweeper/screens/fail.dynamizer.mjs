@@ -1,7 +1,19 @@
-export default function (screen) {
-  const tryAgainButton = screen.querySelector("#try-again-button");
+export default async (manager) => {
+  const screen = await manager.screenElementFactory.createScreenFromPath(
+    import.meta.url,
+    {
+      init: function init() {
+        initTryAgainButton();
+      },
+    }
+  );
+  return screen;
 
-  tryAgainButton.addEventListener("click", () => {
-    this.newGame();
-  });
-}
+  function initTryAgainButton() {
+    const tryAgainButton = screen.querySelector("#try-again-button");
+
+    tryAgainButton.addEventListener("click", () => {
+      manager.newGame();
+    });
+  }
+};
