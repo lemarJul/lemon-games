@@ -18,7 +18,6 @@ export default class AbstractCustomELement extends HTMLElement {
       link.rel = "stylesheet";
       link.href = styleUrl;
       rootNode.prepend(link);
-      console.log(`Screen: ${this.id} loaded with CSS: ${link.href}`);
     } catch (error) {
       console.error("Error loading CSS:", error);
     }

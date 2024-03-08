@@ -6,7 +6,6 @@ import HTMLElements from "./modules/HtmlElements.mjs";
 import ScreenElementFactory from "../../components/ScreenElementFactory.mjs";
 
 import * as screenComponents from "./screens/index.mjs";
-console.log(screenComponents);
 export default class MineSweeper extends AbstractExe {
   constructor({ screenController, buttonController, soundController }) {
     super({
@@ -26,7 +25,6 @@ export default class MineSweeper extends AbstractExe {
   newGame() {
     this.started = false;
 
-    console.log(this.screenController.screens);
     const gridScreen = this.screenController.screens.minesweeperGrid;
     const oldGrid = gridScreen.querySelector("square-grid");
     const difficulty = this.HTMLElements.difficulty.value;

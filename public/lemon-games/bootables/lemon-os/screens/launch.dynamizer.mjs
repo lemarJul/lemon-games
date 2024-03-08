@@ -3,7 +3,6 @@ export default async (manager) => {
     import.meta.url,
     {
       init: function init() {
-        console.log("init", this);
         manager.screenController.bootScreen = screen;
         screen.onSelfShown(AnimateToNextScreen);
       },
