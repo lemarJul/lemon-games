@@ -16,7 +16,7 @@ export default async (manager) => {
   function initGridWin() {
     screen.addEventListener(SquareGrid.events.complete, () => {
       manager.screenController.display.minesweeperWin();
-      manager.timer.stop();
+      manager.timer.pause();
     });
   }
 
@@ -29,9 +29,10 @@ export default async (manager) => {
     });
   }
 
+  //todo: think about how to handle the game controls buttons for each screen
   function initStartButton() {
     manager.buttonController.startButton.addEventListener("click", () => {
-      manager.timer.stop();
+      manager.timer.pause();
       manager.screenController.display.minesweeperPaused();
     });
   }

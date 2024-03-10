@@ -1,42 +1,58 @@
 import SquareGrid from "../components/Grid/SquareGridElement.mjs";
-
+console.log(SquareGrid.events);
 export default class TimerDisplay {
   constructor(HTMLElement) {
     this.wrappedElement = HTMLElement;
-    this.defaultTime = "000";
+    this.defaultTime = 0;
     this.time = this.defaultTime;
-    this.registerListerners();
+    this._registerListerners();
   }
-  registerListerners() {
+  get time() {
+    return this._time;
+  }
+
+  set time(val) {
+    this.render((this._time = val));
+  }
+
+  render(val) {
+    this.wrappedElement.innerHTML = this._formatedTime(val);
+  }
+
+  _formatedTime(value) {
+    return ("00" + value.toString()).slice(-3);
+  }
+
+  _registerListerners() {
     this.wrappedElement
       .getRootNode()
       .addEventListener(SquareGrid.events.started, this.run.bind(this));
     this.wrappedElement
       .getRootNode()
-      .addEventListener("gameStopped", this.stop.bind(this));
-    this.wrappedElement
-      .getRootNode()
-      .addEventListener("gameReset", this.reset.bind(this));
+      .addEventListener(SquareGrid.events.stopped, this.pause.bind(this));
   }
 
   run() {
-    this.interval = setInterval(this.incrementTimer.bind(this), 1000);
+    this.interval = setInterval(this._incrementTimer.bind(this), 1000);
   }
 
-  incrementTimer() {
+  _incrementTimer() {
     this.time += 1;
-    const formated = ("00" + this.time).slice(-3);
-    this.wrappedElement.innerHTML = formated;
   }
 
-  stop() {
+  pause() {
     clearInterval(this.interval);
   }
 
+  resume() {
+    if (this._time) {
+      this.run();
+    }
+  }
+
   reset() {
-    this.stop();
-    this.time = 0;
-    this.wrappedElement.innerHTML = this.defaultTime;
+    this.pause();
+    this.time = this.defaultTime;
   }
 
   getTime() {
