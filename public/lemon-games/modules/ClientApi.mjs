@@ -3,6 +3,11 @@ export default class LemonClientApi {
     "https://script.google.com/macros/s/AKfycbyTm6LjZR4X1YuJqDTa__2QgaTgRYUTrwi4LYQ1W68FOdrqs4_57TmV1C_Mn3-c9HqKUw/exec"
 
   static add(modelName, data) {
+    if (!navigator.onLine) {
+      console.warn('No Network Connection')
+      return []
+    }
+    
     data.game = modelName;
 
     return fetch(this.apiURL, {
@@ -16,6 +21,10 @@ export default class LemonClientApi {
   }
 
   static getAll() {
+    if (!navigator.onLine) {
+      console.warn('No Network Connection')
+      return []
+    }
     return fetch(this.apiURL)
       .then((response) => response.json())
       .then((data) => {
@@ -24,6 +33,11 @@ export default class LemonClientApi {
   }
 
   static getGame(game) {
+    if (!navigator.onLine) {
+      console.warn('No Network Connection')
+      return []
+    }
+
     return fetch(`${this.apiURL}?route=${game}`)
       .then((response) => response.json())
       .then((data) => {
@@ -33,4 +47,5 @@ export default class LemonClientApi {
         return data;
       });
   }
+
 }
