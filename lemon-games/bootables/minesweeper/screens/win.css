@@ -1,0 +1,80 @@
+#winHeadband {
+  background-color: var(--color-screen-dark);
+  color: var(--color-screen-light);
+  text-align: center;
+  margin-top: 40px;
+  width: 100%;
+}
+#time-result {
+  font-size: xxx-large;
+}
+
+#name-submit {
+  font-family: var(--screen-font);
+  width: 100%;
+  margin: 10px auto;
+  display: block;
+  background-color: var(--color-screen-medium);
+  color: var(--color-screen-dark);
+  border: none;
+  /* padding: 5px 10px; */
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+}
+#name-submit::placeholder {
+  color: var(--color-screen-light);
+}
+#name-submit.empty {
+  color: var(--color-screen-light);
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+#name-submit:focus,
+#name-submit:hover {
+  animation: none;
+  outline: none;
+  background-color: var(--color-screen-dark);
+  color: var(--color-screen-light);
+}
+
+input[type="submit"] {
+  display: inline-flex;
+  justify-content: center;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--screen-font);
+  font-size: small;
+  background-color: var(--color-screen-medium);
+  color: var(--color-screen-light);
+  width: 200px;
+}
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+  background-color: var(--color-screen-dark);
+}
+
+.bottom-buttons {
+  display: flex;
+  gap: 2px;
+  width: 100%;
+  flex-direction: column;
+}
+
+.submit-message {
+  margin: 20px 0;
+  text-align: center;
+  width: 250px;
+}
