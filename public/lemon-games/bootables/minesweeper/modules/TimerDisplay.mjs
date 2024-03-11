@@ -1,11 +1,22 @@
 import SquareGrid from "../components/Grid/SquareGridElement.mjs";
-console.log(SquareGrid.events);
+
 export default class TimerDisplay {
-  constructor(HTMLElement) {
+  constructor(
+    HTMLElement,
+    {
+      startEvent = SquareGrid.events.started,
+      stopEvent = SquareGrid.events.stopped,
+    } = {}
+  ) {
     this.wrappedElement = HTMLElement;
     this.defaultTime = 0;
     this.time = this.defaultTime;
-    this._registerListerners();
+    this.observedEvents = {
+      start: startEvent,
+      stop: stopEvent,
+    };
+
+    this._registerListeners();
   }
   get time() {
     return this._time;
@@ -23,13 +34,13 @@ export default class TimerDisplay {
     return ("00" + value.toString()).slice(-3);
   }
 
-  _registerListerners() {
+  _registerListeners() {
     this.wrappedElement
       .getRootNode()
-      .addEventListener(SquareGrid.events.started, this.run.bind(this));
+      .addEventListener(this.observedEvents.start, this.run.bind(this));
     this.wrappedElement
       .getRootNode()
-      .addEventListener(SquareGrid.events.stopped, this.pause.bind(this));
+      .addEventListener(this.observedEvents.stop, this.pause.bind(this));
   }
 
   run() {
