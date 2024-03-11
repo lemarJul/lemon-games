@@ -1,7 +1,5 @@
 import AbstractExe from "../AbstractExe.mjs";
 import GridElementFactory from "./components/Grid/GridElementFactory.mjs";
-import TimerDisplay from "./modules/TimerDisplay.mjs";
-import FlagCounter from "./modules/FlagCounter.mjs";
 import HTMLElements from "./modules/HtmlElements.mjs";
 import ScreenElementFactory from "../../components/ScreenElementFactory.mjs";
 
@@ -14,29 +12,19 @@ export default class MineSweeper extends AbstractExe {
       buttonController,
       soundController,
     });
+    this.HTMLElements = HTMLElements(this.screenController.wrappedElement);
+    this.timer;
+    this.flagCounter;
 
-    this._renderScreenComponents(screenComponents).then(() => {
-      this.HTMLElements = HTMLElements(this.screenController.wrappedElement);
-      this.timer = new TimerDisplay(this.HTMLElements.timer);
-      this.flagCounter = new FlagCounter(this.HTMLElements.flagCounter);
-    });
+    this._renderScreenComponents(screenComponents).then(() => {});
   }
 
   newGame() {
-    this.started = false;
-
-    const gridScreen = this.screenController.screens.minesweeperGrid;
-    const oldGrid = gridScreen.querySelector("square-grid");
     const difficulty = this.HTMLElements.difficulty.value;
     const safeCorners = this.HTMLElements.safeCorners.value === "true";
-    const grid = GridElementFactory.createSquareGrid(difficulty, safeCorners);
-
-    gridScreen.replaceChild(grid, oldGrid);
-
-    this.flagCounter.countDown = grid.nMines;
-    this.timer.reset();
-    this.screenController.display.minesweeperGrid();
+    this.screenController.screens.minesweeperGrid.newGame(difficulty,safeCorners);
   }
+
   boot() {
     this.screenController.display.minesweeperMenu();
   }
