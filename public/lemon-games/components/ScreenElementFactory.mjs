@@ -7,7 +7,7 @@ export default class ScreenElementFactory {
 
   async createScreenFromPath(path, { init = () => {} } = {}) {
     const modulePath = path;
-    const pathWith = (ext) => modulePath.replace(".dynamizer.mjs", ext);
+    const pathWith = (ext) => modulePath.replace(".mjs", ext);
 
     //id
     const managerName = this.manager.name.toLowerCase();
