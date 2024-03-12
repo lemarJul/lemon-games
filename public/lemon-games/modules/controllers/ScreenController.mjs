@@ -1,5 +1,4 @@
 import AbstractController from "./AbstractController.mjs";
-import ScreenElement from "../../components/ScreenElement.mjs";
 //TODO implement enable and disable methods
 
 export default class ScreenController extends AbstractController {
