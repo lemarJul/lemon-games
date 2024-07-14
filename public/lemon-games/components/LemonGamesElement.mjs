@@ -1,7 +1,7 @@
 import LemonOS from "../bootables/lemon-os/lemon-os.mjs";
-import SoundController from "../modules/controllers/SoundController.mjs";
-import ButtonController from "../modules/controllers/ButtonController.mjs";
-import ScreenController from "../modules/controllers/ScreenController.mjs";
+import SoundController from "../controllers/SoundController.mjs";
+import ButtonController from "../controllers/ButtonController.mjs";
+import ScreenController from "../controllers/ScreenController.mjs";
 import {
   canStaticFetchContent,
   canStaticFetchStyle,

@@ -1,4 +1,4 @@
-import ScreenController from "../../../modules/controllers/ScreenController.mjs";
+import ScreenController from "../../../controllers/ScreenController.mjs";
 import AbstractCustomELement from "../../../components/AbstractCustomElement.mjs";
 import {
   canStaticFetchContent,

@@ -1,4 +1,4 @@
-import DataController from "../modules/controllers/DataController.mjs";
+import DataController from "../controllers/DataController.mjs";
 import ScreenElementFactory from "../components/ScreenElementFactory.mjs";
 
 export default class AbstractExe {
