@@ -1,4 +1,4 @@
-import LemonClientApi from "../ClientApi.mjs";
+import LemonClientApi from "../api/ClientApi.mjs";
 
 export default class DataController {
     constructor(modelName){

@@ -1,4 +1,4 @@
-import AbstractController from "./AbstractController.mjs";
+import AbstractController from "../modules/AbstractController.mjs";
 
 //TODO implement enable and disable methods
 export default class ButtonController extends AbstractController {
