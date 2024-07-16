@@ -4,17 +4,17 @@ export default class AbstractCell extends HTMLButtonElement {
     this.x = x;
     this.y = y;
 
-    const eventListeners = [
-      { event: "contextmenu", listener: this._preventDefaultHandler },
+    this.registerEventListeners([
       {
         event: "click",
         listener: this._revealHandler,
         options: { once: true },
       },
+      // following are two separate event listeners to allow removing the toggleFlagged listener but keeping the preventDefault listener
+      { event: "contextmenu", listener: (e) => e.preventDefault() },
       { event: "contextmenu", listener: this._toggleFlagged },
-    ];
+    ]);
 
-    this.registerEventListeners(eventListeners);
     this.classList.add("grid-item");
   }
   // EVENT LISTENERS
@@ -24,9 +24,6 @@ export default class AbstractCell extends HTMLButtonElement {
       this.addEventListener(event, listener, options);
     });
   }
-  _preventDefaultHandler(e) {
-    e.preventDefault();
-  }
 
   _revealHandler() {
     if (this._isFlagged()) this._toggleFlagged();
@@ -34,6 +31,7 @@ export default class AbstractCell extends HTMLButtonElement {
     this._reveal();
   }
   _reveal() {
+    console.log("revealing", this);
     this.classList.add("revealed");
   }
 

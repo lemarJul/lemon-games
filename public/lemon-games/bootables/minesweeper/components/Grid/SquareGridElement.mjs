@@ -1,4 +1,4 @@
-import CellElementFactory from "../Cell/CellElementFactory.mjs";
+import CellFactory from "../Cell/CellFactory.mjs";
 
 export default class SquareGridElement extends HTMLElement {
   constructor(matrix) {
@@ -16,7 +16,7 @@ export default class SquareGridElement extends HTMLElement {
 
     this._matrix.forEach((row, x) => {
       row.forEach((minesNearBy, y) => {
-        const cell = CellElementFactory.createCell(x, y, minesNearBy);
+        const cell = CellFactory.createCell(x, y, minesNearBy);
         // this._matrix[x][y] = cell;
         this.appendChild(cell);
       });
@@ -45,13 +45,16 @@ export default class SquareGridElement extends HTMLElement {
         );
       }
     };
-    this.addEventListener(CellElementFactory.events.revealed, checkGridComplete);
+    this.addEventListener(
+      CellFactory.events.revealed,
+      checkGridComplete
+    );
 
     const cellRevealedHandler = (e) => {
       if (e.target.hasAdjacentMines) return;
 
       const { x, y } = e.target;
-      const adjacentPositions = this._matrix.getAdjacentPositions(x, y);
+      const adjacentPositions = this._matrix.getAdjacentPositionsTo(x, y);
 
       adjacentPositions.forEach(([x, y]) =>
         this.cellElement(x, y).dispatchEvent(
@@ -59,7 +62,10 @@ export default class SquareGridElement extends HTMLElement {
         )
       );
     };
-    this.addEventListener(CellElementFactory.events.revealed, cellRevealedHandler);
+    this.addEventListener(
+      CellFactory.events.revealed,
+      cellRevealedHandler
+    );
 
     const gameLostHandler = (e) => {
       console.log("You lost!");
@@ -67,7 +73,10 @@ export default class SquareGridElement extends HTMLElement {
         new Event(SquareGridElement.events.stopped, { bubbles: true })
       );
     };
-    this.addEventListener(CellElementFactory.events.exploded, gameLostHandler);
+    this.addEventListener(
+      CellFactory.events.exploded,
+      gameLostHandler
+    );
   }
 
   get leftFlags() {
@@ -79,7 +88,7 @@ export default class SquareGridElement extends HTMLElement {
       started: "lg-grid-started",
       complete: "lg-grid-complete",
       stopped: "lg-grid-stopped",
-      ...CellElementFactory.events,
+      ...CellFactory.events,
     };
   }
   static get tag() {

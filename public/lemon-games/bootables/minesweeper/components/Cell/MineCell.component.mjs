@@ -1,6 +1,6 @@
-import AbstractCell from "./AbstractCell.mjs";
+import AbstractCell from "./AbstractCell.component.mjs";
 
-export default class MineCellElement extends AbstractCell {
+export default class MineCell extends AbstractCell {
   constructor(x, y) {
     super(x, y);
 
@@ -10,7 +10,7 @@ export default class MineCellElement extends AbstractCell {
   _reveal() {
     super._reveal();
     this.classList.add("mine");
-    this.dispatchEvent(new Event(MineCellElement.events.exploded, { bubbles: true }));
+    this.dispatchEvent(new Event(MineCell.events.exploded, { bubbles: true }));
   }
 
   static get events() {
@@ -22,6 +22,6 @@ export default class MineCellElement extends AbstractCell {
     return "mine-cell";
   }
 }
-if (!customElements.get(MineCellElement.tag)) {
-  customElements.define(MineCellElement.tag, MineCellElement, { extends: "button" });
+if (!customElements.get(MineCell.tag)) {
+  customElements.define(MineCell.tag, MineCell, { extends: "button" });
 }
