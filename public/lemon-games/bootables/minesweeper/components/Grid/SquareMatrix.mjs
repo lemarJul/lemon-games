@@ -1,100 +1,86 @@
-export default class SquareMatrix extends Array {
-  constructor({ length, safeCorners, nMines }) {
-    super(length);
-    this._minPos = 0;
-    this._maxPos = length - 1;
-    this._safeCorners = safeCorners
+import Array2D from "./Array2D.mjs";
+
+const CELL_VALUES = {
+  DEFAUlT: 0,
+  MINE: -1,
+};
+
+// const Cell = () => {
+//   this.value = CELL_VALUES.DEFAUlT;
+//   this.revealed = false;
+//   this.flagged = false;
+//   this.isMine = value === CELL_VALUES.MINE;
+// };
+
+export default class SquareMatrix extends Array2D {
+  #safeCorners;
+  #minesCoordinates;
+  constructor({ length, safeCorners, nMines } = {}) {
+    super(length, length, CELL_VALUES.DEFAUlT);
+    this.#safeCorners = safeCorners
       ? [
-          [this._minPos, this._minPos],
-          [this._minPos, this._maxPos],
-          [this._maxPos, this._minPos],
-          [this._maxPos, this._maxPos],
+          [this._MIN_X, this._MIN_Y],
+          [this._MIN_X, this._MAX_Y],
+          [this._MAX_X, this._MIN_Y],
+          [this._MAX_X, this._MAX_Y],
         ]
       : [];
-    this._nMines = nMines;
-    this._minesCoordinates = [];
-
-    this._defaultCellValue = 0;
-    this._mineValue = -1;
-
-    this._initDefaultCells();
-    this._setMines();
-    this._setAdjacentToMinesCells();
+    this.nMines = nMines;
+    this.#minesCoordinates = [];
+    this.#initMines();
   }
-  get nMines() {
-    return this._nMines;
-  }
+
   get safeCellsCount() {
-    return this.length * this.length - this._nMines;
+    return this.length * this.length - this.nMines;
   }
 
-  _initDefaultCells() {
-    for (let x = 0; x < this.length; x++) {
-      this[x] = Array(this.length).fill(this._defaultCellValue);
-    }
-  }
-  _setMines() {
-    while (this._minesCoordinates.length < this._nMines) {
-      const [x, y] = this._getRandomCoordinates();
-      this._laySingleMine(x, y);
-    }
+  #initMines() {
+    let counter = this.nMines;
+
+    do {
+      const coordinates = this.#getRandomCoordinates();
+      if (this.#isSafeCorner(...coordinates) || this.#isMine(...coordinates))
+        continue;
+
+      this.#setMine(...coordinates);
+      counter--;
+    } while (counter);
   }
 
-  _getRandomCoordinates() {
+  #getRandomCoordinates() {
     const randomPosition = () => Math.floor(Math.random() * this.length);
-    return ["x", "y"].map((axe) => randomPosition());
+    return [randomPosition(), randomPosition()];
   }
-
-  _laySingleMine(x, y) {
-    if (this._isMine(x, y) || this._isSafeCorner(x, y)) return;
-
-    this[x][y] = this._mineValue;
-    this._minesCoordinates.push([x, y]);
-  }
-
-  _isMine(x, y) {
-    return this[x][y] === this._mineValue;
-  }
-
-  _isSafeCorner(x, y) {
-    return this._safeCorners.some(
+  #isSafeCorner(x, y) {
+    return this.#safeCorners.some(
       ([cornerX, cornerY]) => x === cornerX && y === cornerY
     );
   }
-  _setAdjacentToMinesCells() {
-    this._minesCoordinates.forEach(([x, y]) =>
-      this._incrementAdjacentCells(x, y)
-    );
+  #isMine(x, y) {
+    return this[x][y] === CELL_VALUES.MINE;
   }
-
-  _incrementAdjacentCells(x, y) {
-    const adjacentPositions = this.getAdjacentPositions(x, y);
-    adjacentPositions.forEach(([x, y]) => {
-      if (this._isMine(x, y)) return;
-      this[x][y]++;
+  #setMine(x, y) {
+    this[x][y] = CELL_VALUES.MINE;
+    this.#incrementCellsAdjacentTo(x, y);
+  }
+  #incrementCellsAdjacentTo(x, y) {
+    this.getAdjacentPositionsTo(x, y).forEach(([x, y]) => {
+      if (!this.#isMine(x, y)) this[x][y]++;
     });
   }
-
-  getAdjacentPositions(centralX, centralY) {
-    const adjacentPositions = [];
+  getAdjacentPositionsTo(x, y) {
+    const output = [];
     const offsets = [-1, 0, 1];
-
-    const isOutsideGrid = (axePosition) =>
-      axePosition < this._minPos || axePosition > this._maxPos;
-    const isCentralCell = (x, y) => x === centralX && y === centralY;
-
     offsets.forEach((offset_x) => {
       offsets.forEach((offset_y) => {
-        const x = centralX + offset_x;
-        const y = centralY + offset_y;
-        if (isOutsideGrid(x)) return;
-        if (isOutsideGrid(y)) return;
-        if (isCentralCell(x, y)) return;
-
-        adjacentPositions.push([x, y]);
+        const [x_, y_] = [x + offset_x, y + offset_y];
+        const isZeroOffset = offset_x === 0 && offset_y === 0;
+        const isNonValidX = x_ < this._MIN_X || x_ > this._MAX_X;
+        const isNonValidY = y_ < this._MIN_Y || y_ > this._MAX_Y;
+        if (isZeroOffset || isNonValidX || isNonValidY) return;
+        output.push([x_, y_]);
       });
     });
-
-    return adjacentPositions;
+    return output;
   }
 }
