@@ -36,3 +36,24 @@ export const canStaticRegisterFont = {
     document.fonts.add(font);
   },
 };
+
+export function compose(...mixins) {
+  return (superClass) =>
+    mixins.reduce((c, mixin) => {
+      console.log(mixin.name);
+      return mixin(c);
+    }, superClass);
+}
+
+export function canStaticRegisterOnce(superClass) {
+  return class extends superClass {
+    static get _tagName() {
+      throw new Error("Subclass must override the static get tagName()");
+    }
+    static registerOnce(element) {
+      if (!customElements.get(this._tagName)) {
+        customElements.define(this._tagName, this, { extends: element });
+      }
+    }
+  };
+}

@@ -3,7 +3,7 @@ import AbstractCustomELement from "../../../components/AbstractCustomElement.mjs
 import {
   canStaticFetchContent,
   canStaticFetchStyle,
-} from "../../../components/componentMixins.mjs";
+} from "../../../mixins/componentMixins.mjs";
 
 export default class MenuButton extends AbstractCustomELement {
   constructor() {

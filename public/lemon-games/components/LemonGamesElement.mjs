@@ -6,7 +6,7 @@ import {
   canStaticFetchContent,
   canStaticFetchStyle,
   canStaticRegisterFont,
-} from "./componentMixins.mjs";
+} from "../mixins/componentMixins.mjs";
 
 export default class LemonGamesElement extends Object.assign(
   HTMLElement,
