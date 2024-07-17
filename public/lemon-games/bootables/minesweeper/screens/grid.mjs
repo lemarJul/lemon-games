@@ -1,14 +1,14 @@
 import Grid from "../components/Grid/Grid.component.mjs";
-import TimerDisplay from "../components/TimerDisplay.mjs";
-import FlagCounter from "../components/FlagCounter.mjs";
-import GridElementFactory from "../components/Grid/GridComponentFactory.mjs";
+import Timer from "../components/Timer.component.mjs";
+import FlagCounter from "../components/FlagCounter.component.mjs";
+import GridFactory from "../components/Grid/GridFactory.mjs";
 
 export default async (manager) => {
   const screen = await manager.screenElementFactory.createScreenFromPath(
     import.meta.url,
     {
       init: function init() {
-        screen.timer = new TimerDisplay(manager.HTMLElements.timer);
+        screen.timer = new Timer(manager.HTMLElements.timer);
         screen.flagCounter = new FlagCounter(manager.HTMLElements.flagCounter);
         screen.newGame = newGame;
 
@@ -46,7 +46,7 @@ export default async (manager) => {
 
   function newGame(difficulty, safeCorners) {
     const oldGrid = screen.querySelector("square-grid");
-    const newGrid = GridElementFactory.createGrid(difficulty, safeCorners);
+    const newGrid = GridFactory.createGrid(difficulty, safeCorners);
 
     screen.replaceChild(newGrid, oldGrid);
     screen.flagCounter.countDown = newGrid.nMines;

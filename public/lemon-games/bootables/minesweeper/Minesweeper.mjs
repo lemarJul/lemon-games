@@ -1,5 +1,5 @@
 import AbstractExe from "../AbstractExe.mjs";
-import GridFactory from "./components/Grid/GridComponentFactory.mjs";
+import GridFactory from "./components/Grid/GridFactory.mjs";
 import HTMLElements from "./modules/HtmlElements.mjs";
 import ScreenElementFactory from "../../components/ScreenElementFactory.mjs";
 

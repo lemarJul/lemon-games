@@ -1,6 +1,6 @@
 import Grid from "./Grid/Grid.component.mjs";
 
-export default class TimerDisplay {
+export default class Timer {
   constructor(
     HTMLElement,
     { startEvent = Grid.events.started, stopEvent = Grid.events.stopped } = {}
