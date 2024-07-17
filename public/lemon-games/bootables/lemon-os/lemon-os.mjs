@@ -21,7 +21,6 @@ export default class LemonOS extends AbstractExe {
 
     this._renderScreenComponents(screenComponentsFactoryFns);
 
-
     // setup buttons
     this.buttonMapping = {
       primaryButton: () => {
@@ -51,14 +50,13 @@ export default class LemonOS extends AbstractExe {
     });
   }
 
-  _loadGames() {
+  loadGames() {
     this.games.forEach((game) => {
       this._loadSingleGame(game);
     });
   }
 
   // todo: turn this to Array with objects with properties name, path, controlMapping, soundMapping, scriptMapping
-
   async _loadSingleGame(Game) {
     const game = new Game(this);
 

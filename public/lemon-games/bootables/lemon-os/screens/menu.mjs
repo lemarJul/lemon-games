@@ -3,7 +3,7 @@ export default async (manager) => {
     import.meta.url,
     {
       init: function init() {
-        manager._loadGames();
+        manager.loadGames();
       },
     }
   );
