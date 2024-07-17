@@ -1,11 +1,11 @@
-import { difficulties } from "../components/Grid/GridElementFactory.mjs";
+import { DIFFICULTIES } from "../settings/difficulties.mjs";
 
 export default async (manager) => {
   const screen = await manager.screenElementFactory.createScreenFromPath(
     import.meta.url,
     {
       init: function init() {
-        renderDifficulty(difficulties);
+        renderDifficulty(DIFFICULTIES);
         difficultyToggle.addEventListener("click", toggleDifficulty);
         safeCornersToggle.addEventListener("click", toggleSafeCorners);
       },

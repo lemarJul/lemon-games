@@ -1,12 +1,9 @@
-import SquareGrid from "./Grid/SquareGridElement.mjs";
+import Grid from "./Grid/Grid.component.mjs";
 
 export default class TimerDisplay {
   constructor(
     HTMLElement,
-    {
-      startEvent = SquareGrid.events.started,
-      stopEvent = SquareGrid.events.stopped,
-    } = {}
+    { startEvent = Grid.events.started, stopEvent = Grid.events.stopped } = {}
   ) {
     this.wrappedElement = HTMLElement;
     this.defaultTime = 0;

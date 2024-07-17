@@ -1,16 +1,5 @@
 import Array2D from "./Array2D.mjs";
-
-const CELL_VALUES = {
-  DEFAUlT: 0,
-  MINE: -1,
-};
-
-// const Cell = () => {
-//   this.value = CELL_VALUES.DEFAUlT;
-//   this.revealed = false;
-//   this.flagged = false;
-//   this.isMine = value === CELL_VALUES.MINE;
-// };
+import { CELL_VALUES } from "./Cell.mjs";
 
 export default class SquareMatrix extends Array2D {
   #safeCorners;
@@ -31,6 +20,7 @@ export default class SquareMatrix extends Array2D {
   }
 
   get safeCellsCount() {
+    console.log("called:  safeCellsCount");
     return this.length * this.length - this.nMines;
   }
 

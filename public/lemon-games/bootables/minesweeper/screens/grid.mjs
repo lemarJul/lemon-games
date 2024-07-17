@@ -1,7 +1,7 @@
-import SquareGrid from "../components/Grid/SquareGridElement.mjs";
+import Grid from "../components/Grid/Grid.component.mjs";
 import TimerDisplay from "../components/TimerDisplay.mjs";
-import FlagCounter from "../modules/FlagCounter.mjs";
-import GridElementFactory from "../components/Grid/GridElementFactory.mjs";
+import FlagCounter from "../components/FlagCounter.mjs";
+import GridElementFactory from "../components/Grid/GridComponentFactory.mjs";
 
 export default async (manager) => {
   const screen = await manager.screenElementFactory.createScreenFromPath(
@@ -21,14 +21,14 @@ export default async (manager) => {
   return screen;
 
   function initGridWin() {
-    screen.addEventListener(SquareGrid.events.complete, () => {
+    screen.addEventListener(Grid.events.complete, () => {
       manager.screenController.display.minesweeperWin();
       screen.timer.pause();
     });
   }
 
   function initGridFail() {
-    screen.addEventListener(SquareGrid.events.stopped, () => {
+    screen.addEventListener(Grid.events.stopped, () => {
       manager.soundController.play.boom();
       setTimeout(() => {
         manager.screenController.display.minesweeperFail();
@@ -46,10 +46,7 @@ export default async (manager) => {
 
   function newGame(difficulty, safeCorners) {
     const oldGrid = screen.querySelector("square-grid");
-    const newGrid = GridElementFactory.createSquareGrid(
-      difficulty,
-      safeCorners
-    );
+    const newGrid = GridElementFactory.createGrid(difficulty, safeCorners);
 
     screen.replaceChild(newGrid, oldGrid);
     screen.flagCounter.countDown = newGrid.nMines;

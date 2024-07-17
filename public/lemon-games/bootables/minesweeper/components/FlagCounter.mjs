@@ -1,4 +1,4 @@
-import { default as Grid } from "../components/Grid/SquareGridElement.mjs";
+import Grid from "./Grid/Grid.component.mjs";
 
 export default class FlagCounter {
   constructor(htmlElement) {
