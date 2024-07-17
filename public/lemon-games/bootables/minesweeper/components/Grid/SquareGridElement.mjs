@@ -1,86 +1,69 @@
 import CellFactory from "../Cell/CellFactory.mjs";
 
-export default class SquareGridElement extends HTMLElement {
+export default class Grid extends HTMLElement {
+  #matrix;
+  #safeCellsToRevealed;
   constructor(matrix) {
     super();
-    this._matrix = matrix;
-    this.nMines = matrix.nMines;
-    this.safeCellsToRevealed = matrix.safeCellsCount;
-
-    this._renderGrid();
-    this._registerEventListeners();
+    this.#matrix = matrix;
+    this.#safeCellsToRevealed = matrix.safeCellsCount;
+    this.#render();
   }
 
-  _renderGrid() {
-    this.style.setProperty("--n-columns", this._matrix.length);
+  #render() {
+    this.style.setProperty("--n-columns", this.#matrix.length);
 
-    this._matrix.forEach((row, x) => {
-      row.forEach((minesNearBy, y) => {
-        const cell = CellFactory.createCell(x, y, minesNearBy);
-        // this._matrix[x][y] = cell;
-        this.appendChild(cell);
-      });
+    this.#matrix.forEach((row, x) => {
+      row.forEach((minesNearBy, y) =>
+        this.appendChild(CellFactory.createCell(x, y, minesNearBy))
+      );
     });
   }
-  cellElement(x, y) {
-    const childPosition = x * this._matrix.length + y;
-    return this.children[childPosition];
+
+  connectedCallBack() {
+    this.#eventsListeners.forEach(({ on, handler, options }) => {
+      this.addEventListener(on, handler, options);
+    });
   }
 
-  _registerEventListeners() {
-    const gameStartedHandler = (e) => {
-      console.log("Game started!");
-      this.dispatchEvent(
-        new Event(SquareGridElement.events.started, { bubbles: true })
-      );
-    };
-    this.addEventListener("click", gameStartedHandler, { once: true });
-
-    const checkGridComplete = (e) => {
-      const isGridComplete = !--this.safeCellsToRevealed;
-
-      if (isGridComplete) {
-        this.dispatchEvent(
-          new Event(SquareGridElement.events.complete, { bubbles: true })
-        );
-      }
-    };
-    this.addEventListener(
-      CellFactory.events.revealed,
-      checkGridComplete
-    );
-
-    const cellRevealedHandler = (e) => {
-      if (e.target.hasAdjacentMines) return;
-
-      const { x, y } = e.target;
-      const adjacentPositions = this._matrix.getAdjacentPositionsTo(x, y);
-
-      adjacentPositions.forEach(([x, y]) =>
-        this.cellElement(x, y).dispatchEvent(
-          new Event("click", { bubbles: true })
-        )
-      );
-    };
-    this.addEventListener(
-      CellFactory.events.revealed,
-      cellRevealedHandler
-    );
-
-    const gameLostHandler = (e) => {
-      console.log("You lost!");
-      this.dispatchEvent(
-        new Event(SquareGridElement.events.stopped, { bubbles: true })
-      );
-    };
-    this.addEventListener(
-      CellFactory.events.exploded,
-      gameLostHandler
-    );
+  disconnectedCallback() {
+    this.#eventsListeners.forEach(({ on, handler, options }) => {
+      this.removeEventListener(on, handler, options);
+    });
   }
 
-  get leftFlags() {
-    return this._nFlags;
+  get #eventsListeners() {
+    return [
+      {
+        on: "click",
+        handler: () => this.#dispatch(Grid.events.started),
+        options: { once: true },
+      },
+      {
+        on: CellFactory.events.revealed,
+        handler: (e) => {
+          if (!e.target.hasAdjacentMines) this.#revealAdjacentTo(e.target);
+        },
+      },
+      {
+        on: CellFactory.events.revealed,
+        handler: () => {
+          const isGridComplete = !--this.#safeCellsToRevealed;
+
+          if (isGridComplete) {
+            this.#dispatch(Grid.events.complete);
+          }
+        },
+      },
+      {
+        on: CellFactory.events.exploded,
+        handler: () => this.#dispatch(Grid.events.stopped),
+      },
+    ];
+  }
+
+  #dispatch(event) {
+    this.dispatchEvent(new Event(event, { bubbles: true }));
   }
 
   static get events() {
@@ -91,11 +74,31 @@ export default class SquareGridElement extends HTMLElement {
       ...CellFactory.events,
     };
   }
-  static get tag() {
+
+  #revealAdjacentTo({ x, y }) {
+    const adjacentPositions = this.#matrix.getAdjacentPositionsTo(x, y);
+
+    adjacentPositions.forEach(([x, y]) =>
+      this.#getCell(x, y).dispatchEvent(new Event("click", { bubbles: true }))
+    );
+  }
+
+  #getCell(x, y) {
+    const childPosition = x * this.#matrix.length + y;
+    return this.children[childPosition];
+  }
+
+  get nMines() {
+    return this.#matrix.nMines || 0;
+  }
+
+  static get #tag() {
     return "square-grid";
   }
+  static registerOnce() {
+    if (!customElements.get(this.#tag)) {
+      customElements.define(this.#tag, this);
+    }
+  }
 }
-
-if (!customElements.get(SquareGridElement.tag)) {
-  customElements.define(SquareGridElement.tag, SquareGridElement);
-}
+Grid.registerOnce();
