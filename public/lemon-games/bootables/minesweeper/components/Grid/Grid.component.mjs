@@ -21,7 +21,7 @@ export default class Grid extends HTMLElement {
     
   }
 
-  connectedCallBack() {
+  connectedCallback() {
     this.#eventsListeners.forEach(({ on, handler, options }) => {
       this.addEventListener(on, handler, options);
     });
