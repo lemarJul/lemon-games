@@ -1,6 +1,8 @@
 import CellFactory from "../Cell/CellFactory.mjs";
 import { cellEvents } from "../Cell/index.mjs";
-export default class Grid extends HTMLElement {
+import { canStaticRegisterAsComponent } from "../../../../mixins/componentMixins.mjs";
+export default class Grid extends canStaticRegisterAsComponent(HTMLElement) {
+  static _tagName = "square-grid";
   #matrix;
   #safeCellsToRevealed;
   constructor(matrix) {
@@ -90,14 +92,5 @@ export default class Grid extends HTMLElement {
   get nMines() {
     return this.#matrix.nMines || 0;
   }
-
-  static get #tag() {
-    return "square-grid";
-  }
-  static registerOnce() {
-    if (!customElements.get(this.#tag)) {
-      customElements.define(this.#tag, this);
-    }
-  }
 }
-Grid.registerOnce();
+Grid.registerAsComponent();

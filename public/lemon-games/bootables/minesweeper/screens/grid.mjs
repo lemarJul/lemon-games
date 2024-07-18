@@ -1,7 +1,7 @@
+import GridFactory from "../components/Grid/GridFactory.mjs";
 import Grid from "../components/Grid/Grid.component.mjs";
 import Timer from "../components/Timer.component.mjs";
 import FlagCounter from "../components/FlagCounter.component.mjs";
-import GridFactory from "../components/Grid/GridFactory.mjs";
 
 export default async (manager) => {
   const screen = await manager.screenElementFactory.createScreenFromPath(

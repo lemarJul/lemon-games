@@ -1,49 +1,66 @@
-export default class AbstractCell extends HTMLButtonElement {
+import { canStaticRegisterAsComponent } from "../../../../mixins/componentMixins.mjs";
+
+export default class AbstractCell extends canStaticRegisterAsComponent(
+  HTMLButtonElement
+) {
   constructor(x, y) {
     super();
     this.x = x;
     this.y = y;
 
-    this.registerEventListeners([
-      {
-        event: "click",
-        listener: this._revealHandler,
-        options: { once: true },
-      },
-      // following are two separate event listeners to allow removing the toggleFlagged listener but keeping the preventDefault listener
-      { event: "contextmenu", listener: (e) => e.preventDefault() },
-      { event: "contextmenu", listener: this._toggleFlagged },
-    ]);
-
-    this.classList.add("grid-item");
+    this.render();
   }
+
+  // RENDER
+  render() {
+    this.classList.add("cell");
+  }
+
+  // LIFECYCLE METHODS
+  connectedCallback() {
+    this.addEventListener("click", this, { once: true });
+    this.addEventListener("contextmenu", this);
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener("click", this);
+    this.removeEventListener("contextmenu", this);
+  }
+
   // EVENT LISTENERS
-
-  registerEventListeners(eventListeners) {
-    eventListeners.forEach(({ event, listener, options }) => {
-      this.addEventListener(event, listener, options);
-    });
+  handleEvent(e) {
+    console.log(this.constructor.name, e.type);
+    console.log("on" + e.type.charAt(0).toUpperCase() + e.type.slice(1));
+    this["on" + e.type.charAt(0).toUpperCase() + e.type.slice(1)](e);
   }
 
-  _revealHandler() {
-    if (this._isFlagged()) this._toggleFlagged();
-    this.removeEventListener("contextmenu", this._toggleFlagged);
+  onClick(e) {
+    if (this.#isFlagged()) this.#toggleFlagged();
     this._reveal();
+    this.removeEventListener("contextmenu", this);
   }
+
+  onContextmenu(e) {
+    e.preventDefault();
+    this.#toggleFlagged();
+  }
+
+  // METHODS
   _reveal() {
-    console.log("revealing", this);
     this.classList.add("revealed");
   }
 
-  _isFlagged() {
+  #isFlagged() {
     return this.classList.contains("flagged");
   }
-  _toggleFlagged() {
+
+  #toggleFlagged() {
     this.classList.toggle("flagged");
     this.dispatchEvent(
       new Event(AbstractCell.events.flagToggled, { bubbles: true })
     );
   }
+
   static get events() {
     return { flagToggled: "lg-flag-toggled" };
   }

@@ -1,12 +1,12 @@
 import AbstractCell from "./AbstractCell.component.mjs";
 
 export default class MineCell extends AbstractCell {
+  static _tagName = "mine-cell";
+
   constructor(x, y) {
     super(x, y);
-
-    // this.addEventListener("click", this.boom);
   }
-  //Method Overriding
+
   _reveal() {
     super._reveal();
     this.classList.add("mine");
@@ -14,14 +14,7 @@ export default class MineCell extends AbstractCell {
   }
 
   static get events() {
-    const events = super.events;
-    events.exploded = "lg-mine-exploded";
-    return events;
-  }
-  static get tag() {
-    return "mine-cell";
+    return { ...super.events, exploded: "lg-mine-exploded" };
   }
 }
-if (!customElements.get(MineCell.tag)) {
-  customElements.define(MineCell.tag, MineCell, { extends: "button" });
-}
+MineCell.registerAsComponent("button");

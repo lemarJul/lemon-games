@@ -45,12 +45,12 @@ export function compose(...mixins) {
     }, superClass);
 }
 
-export function canStaticRegisterOnce(superClass) {
+export function canStaticRegisterAsComponent(superClass) {
   return class extends superClass {
     static get _tagName() {
       throw new Error("Subclass must override the static get tagName()");
     }
-    static registerOnce(element) {
+    static registerAsComponent(element = "") {
       if (!customElements.get(this._tagName)) {
         customElements.define(this._tagName, this, { extends: element });
       }

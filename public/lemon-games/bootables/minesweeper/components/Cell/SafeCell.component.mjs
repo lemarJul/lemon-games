@@ -1,30 +1,28 @@
 import AbstractCell from "./AbstractCell.component.mjs";
 
 export default class SafeCell extends AbstractCell {
+  static _tagName = "safe-cell";
+  #nAdjacentMines;
+
   constructor(x, y, nAdjacentMines) {
     super(x, y);
-    this._nAdjacentMines = nAdjacentMines;
+    this.#nAdjacentMines = nAdjacentMines;
+  }
+  get hasAdjacentMines() {
+    return this.#nAdjacentMines !== 0;
   }
 
   _reveal() {
     super._reveal();
-    this.classList.add(`near${this._nAdjacentMines}`);
+    this.classList.add(`near${this.#nAdjacentMines}`);
     this.dispatchEvent(new Event(SafeCell.events.revealed, { bubbles: true }));
   }
 
-  get hasAdjacentMines() {
-    return this._nAdjacentMines !== 0;
-  }
-
   static get events() {
-    const events = super.events;
-    events.revealed = "lg-safe-cell-revealed";
-    return events;
-  }
-  static get tag() {
-    return "safe-cell";
+    return {
+      ...super.eventTypes,
+      revealed: "lg-safe-cell-revealed",
+    };
   }
 }
-if (!customElements.get(SafeCell.tag)) {
-  customElements.define(SafeCell.tag, SafeCell, { extends: "button" });
-}
+SafeCell.registerAsComponent("button");
