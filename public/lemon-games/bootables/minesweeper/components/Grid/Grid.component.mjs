@@ -1,5 +1,5 @@
 import CellFactory from "../Cell/CellFactory.mjs";
-
+import { cellEvents } from "../Cell/index.mjs";
 export default class Grid extends HTMLElement {
   #matrix;
   #safeCellsToRevealed;
@@ -18,7 +18,6 @@ export default class Grid extends HTMLElement {
         this.appendChild(CellFactory.createCell(x, y, minesNearBy))
       );
     });
-    
   }
 
   connectedCallback() {
@@ -41,13 +40,13 @@ export default class Grid extends HTMLElement {
         options: { once: true },
       },
       {
-        on: CellFactory.events.revealed,
+        on: cellEvents.revealed,
         handler: (e) => {
           if (!e.target.hasAdjacentMines) this.#revealAdjacentTo(e.target);
         },
       },
       {
-        on: CellFactory.events.revealed,
+        on: cellEvents.revealed,
         handler: () => {
           const isGridComplete = !--this.#safeCellsToRevealed;
 
@@ -57,7 +56,7 @@ export default class Grid extends HTMLElement {
         },
       },
       {
-        on: CellFactory.events.exploded,
+        on: cellEvents.exploded,
         handler: () => this.#dispatch(Grid.events.stopped),
       },
     ];
@@ -72,7 +71,6 @@ export default class Grid extends HTMLElement {
       started: "lg-grid-started",
       complete: "lg-grid-complete",
       stopped: "lg-grid-stopped",
-      ...CellFactory.events,
     };
   }
 
@@ -85,8 +83,8 @@ export default class Grid extends HTMLElement {
   }
 
   #getCell(x, y) {
-    const childPosition = x * this.#matrix.length + y;
-    return this.children[childPosition];
+    const cellIndex = x * this.#matrix.length + y;
+    return this.children[cellIndex];
   }
 
   get nMines() {

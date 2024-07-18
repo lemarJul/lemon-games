@@ -1,4 +1,4 @@
-import Grid from "./Grid/Grid.component.mjs";
+import { cellEvents } from "./Cell/index.mjs";
 
 export default class FlagCounter {
   constructor(htmlElement) {
@@ -17,7 +17,7 @@ export default class FlagCounter {
 
   _registerEventListeners() {
     const rootNode = this._htmlElement.getRootNode();
-    rootNode.addEventListener(Grid.events.flagToggled, this._update.bind(this));
+    rootNode.addEventListener(cellEvents.flagToggled, this._update.bind(this));
   }
 
   _update(e) {
