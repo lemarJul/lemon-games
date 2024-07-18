@@ -50,7 +50,7 @@ export function canStaticRegisterAsComponent(superClass) {
     static get _tagName() {
       throw new Error("Subclass must override the static get tagName()");
     }
-    static registerAsComponent(element = "") {
+    static registerAsComponent(element = null) {
       if (!customElements.get(this._tagName)) {
         customElements.define(this._tagName, this, { extends: element });
       }
