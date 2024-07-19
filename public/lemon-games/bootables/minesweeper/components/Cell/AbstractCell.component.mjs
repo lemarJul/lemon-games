@@ -29,13 +29,11 @@ export default class AbstractCell extends canStaticRegisterAsComponent(
 
   // EVENT LISTENERS
   handleEvent(e) {
-    console.log(this.constructor.name, e.type);
-    console.log("on" + e.type.charAt(0).toUpperCase() + e.type.slice(1));
     this["on" + e.type.charAt(0).toUpperCase() + e.type.slice(1)](e);
   }
 
   onClick(e) {
-    if (this.#isFlagged()) this.#toggleFlagged();
+    if (this.isFlagged()) this.#toggleFlagged();
     this._reveal();
     this.removeEventListener("contextmenu", this);
   }
@@ -50,7 +48,7 @@ export default class AbstractCell extends canStaticRegisterAsComponent(
     this.classList.add("revealed");
   }
 
-  #isFlagged() {
+  isFlagged() {
     return this.classList.contains("flagged");
   }
 
