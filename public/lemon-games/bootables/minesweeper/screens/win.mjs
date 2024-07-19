@@ -23,7 +23,7 @@ export default async (manager) => {
   return screen;
 
   function displayTimer() {
-    const time = manager.timer.getTime();
+    const time = manager.timer.time;
     timeDisplay.textContent = time;
   }
 
@@ -54,7 +54,7 @@ export default async (manager) => {
       event.preventDefault();
 
       const name = nameInput.value;
-      const score = manager.timer.getTime().toString();
+      const score = manager.timer.time.toString();
       const difficulty = manager.HTMLElements.difficulty.value;
       try {
         const res = await manager.dataController.setData({

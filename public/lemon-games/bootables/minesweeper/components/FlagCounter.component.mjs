@@ -1,33 +1,28 @@
+import Grid from "./Grid/Grid.component.mjs";
+import Counter from "./Counter.component.mjs";
 import { cellEvents } from "./Cell/index.mjs";
 
-export default class FlagCounter {
-  constructor(htmlElement) {
-    this._htmlElement = htmlElement;
-    this._registerEventListeners();
+export default class FlagCounter extends Counter {
+  static _tagName = "flag-counter";
+
+  constructor() {
+    super();
+    this.abortController = new AbortController();
+  }
+  connectedCallback() {
+    this.getRootNode().addEventListener(
+      cellEvents.flagToggled,
+      (e) => {
+        console.log("flag toggled");
+        const cell = e.target;
+        cell.isFlagged() ? this.decrement() : this.increment();
+      },
+      { signal: this.abortController.signal }
+    );
   }
 
-  get countDown() {
-    return this._countDown;
-  }
-
-  set countDown(n) {
-    this._countDown = n;
-    this._htmlElement.innerText = this._formated(n);
-  }
-
-  _registerEventListeners() {
-    const rootNode = this._htmlElement.getRootNode();
-    rootNode.addEventListener(cellEvents.flagToggled, this._update.bind(this));
-  }
-
-  _update(e) {
-    const cell = e.target;
-    const isFlagged = cell.classList.contains("flagged");
-
-    isFlagged ? this.countDown-- : this.countDown++;
-  }
-
-  _formated(n) {
-    return ("00" + n).slice(-2);
+  disconnectedCallback() {
+    this.abortController.abort();
   }
 }
+FlagCounter.registerAsComponent();

@@ -13,11 +13,9 @@ export default (parentNode) => {
       return parentNode.querySelector("[name=safeCorners]:checked");
     }
     static get timer() {
-      return parentNode.querySelector("#timer");
+      return parentNode.querySelector("minesweeper-timer");
     }
-    static get bombCounter() {
-      return parentNode.getElementById("bomb-counter");
-    }
+
     static getCell(x, y) {
       return parentNode.getElementById(`x-y`);
     }
@@ -39,10 +37,10 @@ export default (parentNode) => {
     static get settingsButton() {
       return parentNode.getElementById("secondary-button");
     }
-    static get display () {
+    static get display() {
       return parentNode.querySelector("#display");
     }
-    static get powerButton () {
+    static get powerButton() {
       return parentNode.querySelector("#power-button");
     }
     static get leftButton() {
@@ -57,8 +55,8 @@ export default (parentNode) => {
     static get secondaryButton() {
       return parentNode.querySelector("#secondary-button");
     }
-    static get flagCounter(){
-      return parentNode.querySelector("#mine-counter");
+    static get flagCounter() {
+      return parentNode.querySelector("flag-counter");
     }
   };
 };

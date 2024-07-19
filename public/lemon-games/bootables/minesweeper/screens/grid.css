@@ -96,10 +96,10 @@ square-grid {
   padding: 5px 15px;
 }
 
-#timer::after {
+minesweeper-timer::after {
   content: " sec";
 }
-#mine-counter::after {
+flag-counter::after {
   content: " mines";
 }
 #pause-icon::after {

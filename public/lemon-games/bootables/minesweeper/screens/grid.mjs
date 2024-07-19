@@ -1,6 +1,6 @@
 import GridFactory from "../components/Grid/GridFactory.mjs";
 import Grid from "../components/Grid/Grid.component.mjs";
-import Timer from "../components/Timer.component.mjs";
+import MinesweeperTimer from "../components/MinesweeperTimer.component.mjs";
 import FlagCounter from "../components/FlagCounter.component.mjs";
 
 export default async (manager) => {
@@ -8,8 +8,8 @@ export default async (manager) => {
     import.meta.url,
     {
       init: function init() {
-        screen.timer = new Timer(manager.HTMLElements.timer);
-        screen.flagCounter = new FlagCounter(manager.HTMLElements.flagCounter);
+        screen.timer = manager.HTMLElements.timer;
+        screen.flagCounter = manager.HTMLElements.flagCounter;
         screen.newGame = newGame;
 
         initGridWin();
@@ -18,6 +18,7 @@ export default async (manager) => {
       },
     }
   );
+
   return screen;
 
   function initGridWin() {
@@ -49,7 +50,7 @@ export default async (manager) => {
     const newGrid = GridFactory.createGrid(difficulty, safeCorners);
 
     screen.replaceChild(newGrid, oldGrid);
-    screen.flagCounter.countDown = newGrid.nMines;
+    screen.flagCounter.value = newGrid.nMines;
     screen.timer.reset();
     manager.screenController.display.minesweeperGrid();
   }

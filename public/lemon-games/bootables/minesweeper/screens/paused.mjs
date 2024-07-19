@@ -14,9 +14,8 @@ export default async (manager) => {
 
     const resumeGame = () => {
       manager.screenController.display.minesweeperGrid();
-      manager.timer.resume();
+      manager.HTMLElements.timer.run();
     };
     resumeButton.addEventListener("click", resumeGame);
   }
-
 };

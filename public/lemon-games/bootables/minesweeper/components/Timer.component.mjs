@@ -1,69 +1,50 @@
-import Grid from "./Grid/Grid.component.mjs";
-
-export default class Timer {
+import { canStaticRegisterAsComponent } from "../../../mixins/componentMixins.mjs";
+export default class Timer extends canStaticRegisterAsComponent(HTMLElement) {
+  static _tagName = "timer-component";
+  #start;
+  #time;
+  #interval;
+  #step;
+  #eventListeners;
+  #running = false;
   constructor(
-    HTMLElement,
-    { startEvent = Grid.events.started, stopEvent = Grid.events.stopped } = {}
-  ) {
-    this.wrappedElement = HTMLElement;
-    this.defaultTime = 0;
-    this.time = this.defaultTime;
-    this.observedEvents = {
-      start: startEvent,
-      stop: stopEvent,
-    };
+    { start = 0, step = 1 } = {
+      start: 0,
 
-    this._registerListeners();
+      step: 1,
+    }
+  ) {
+    super();
+    this.time = this.#start = this.getAttribute("start") ?? start;
+    this.#step = this.getAttribute("step") ?? step;
+    this.eventListeners = [];
   }
   get time() {
-    return this._time;
+    return this.#time;
   }
 
-  set time(val) {
-    this.render((this._time = val));
+  set time(value) {
+    this.#time = value;
+    this.innerHTML = this.formatedTime;
   }
 
-  render(val) {
-    this.wrappedElement.innerHTML = this._formatedTime(val);
-  }
-
-  _formatedTime(value) {
-    return ("00" + value.toString()).slice(-3);
-  }
-
-  _registerListeners() {
-    this.wrappedElement
-      .getRootNode()
-      .addEventListener(this.observedEvents.start, this.run.bind(this));
-    this.wrappedElement
-      .getRootNode()
-      .addEventListener(this.observedEvents.stop, this.pause.bind(this));
+  get formatedTime() {
+    return ("00" + this.#time.toString()).slice(-3);
   }
 
   run() {
-    this.interval = setInterval(this._incrementTimer.bind(this), 1000);
-  }
-
-  _incrementTimer() {
-    this.time += 1;
-  }
-
-  pause() {
-    clearInterval(this.interval);
-  }
-
-  resume() {
-    if (this._time) {
-      this.run();
+    if (!this.#running) {
+      this.#interval = setInterval(() => (this.time += this.#step), 1000);
+      this.#running = true;
     }
   }
-
+  pause() {
+    clearInterval(this.#interval);
+    this.#running = false;
+  }
   reset() {
     this.pause();
-    this.time = this.defaultTime;
-  }
-
-  getTime() {
-    return this.time;
+    this.time = this.#start;
   }
 }
+Timer.registerAsComponent();

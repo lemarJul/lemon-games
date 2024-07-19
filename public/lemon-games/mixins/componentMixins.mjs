@@ -40,7 +40,6 @@ export const canStaticRegisterFont = {
 export function compose(...mixins) {
   return (superClass) =>
     mixins.reduce((c, mixin) => {
-      console.log(mixin.name);
       return mixin(c);
     }, superClass);
 }
