@@ -1,4 +1,4 @@
-import ScreenElement from "./ScreenElement.mjs";
+import Screen from "./Screen.component.mjs";
 
 export default class ScreenElementFactory {
   constructor(manager) {
@@ -24,7 +24,7 @@ export default class ScreenElementFactory {
     link.href = pathWith(".css");
     //script
 
-    const screen = new ScreenElement(id, content, link, init);
+    const screen = new Screen(id, content, link, init);
 
     return screen;
   }

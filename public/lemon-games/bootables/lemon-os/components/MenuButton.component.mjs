@@ -10,7 +10,7 @@ export default Component.define(
     }
     connectedCallback() {
       this.tabIndex = 0;
-      this.linkStyle(import.meta.url);
+      this.linkLocalStyle(import.meta.url);
       this.addEventListener("click", this);
     }
     disconnectedCallback() {

@@ -1,5 +1,5 @@
 import DataController from "../controllers/DataController.mjs";
-import ScreenElementFactory from "../components/ScreenElementFactory.mjs";
+import ScreenFactory from "../components/ScreenFactory.mjs";
 
 export default class AbstractExe {
   constructor({ name, soundController, buttonController, screenController }) {
@@ -9,7 +9,7 @@ export default class AbstractExe {
     this.buttonController = buttonController;
     this.name = name;
     this.dataController = new DataController(name);
-    this.screenElementFactory = new ScreenElementFactory(this);
+    this.screenElementFactory = new ScreenFactory(this);
   }
 
   //* INSTANCE METHODS
