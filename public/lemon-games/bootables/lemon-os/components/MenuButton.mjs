@@ -1,35 +1,37 @@
+import { Component } from "../../../modules/component.mjs";
+import { canLinkLocalStyle } from "../../../mixins/componentMixins.mjs";
 import ScreenController from "../../../controllers/ScreenController.mjs";
-import AbstractCustomELement from "../../../components/AbstractCustomElement.mjs";
-import {
-  canStaticFetchContent,
-  canStaticFetchStyle,
-} from "../../../mixins/componentMixins.mjs";
 
-export default class MenuButton extends AbstractCustomELement {
-  constructor() {
-    super();
-    this._registerEventListeners();
-  }
-  connectedCallback() {
-    this.tabIndex = 0;
-    this._linkClassStyleOnce(import.meta.url);
-  }
+const { css, html } = await Component.fetchHtmlCss(import.meta.url);
 
-  _registerEventListeners() {
-    this.onClick_sendToScreen();
-  }
+export default Component.define(
+  "menu-button",
+  class extends canLinkLocalStyle(HTMLElement) {
+    constructor() {
+      super();
+    }
+    connectedCallback() {
+      this.tabIndex = 0;
+      this.linkStyle(import.meta.url);
+      this.addEventListener("click", this);
+    }
+    disconnectedCallback() {
+      this.removeEventListener("click", this);
+    }
 
-  //* EVENT LISTENERS
-  onClick_sendToScreen() {
-    this.addEventListener("click", this.sendToScreen.bind(this));
-  }
-  sendToScreen() {
-    if (!this.hasAttribute("link")) return;
-    this.dispatchEvent(ScreenController.Events.showScreen);
-  }
+    //* EVENT LISTENERS
 
-  static get tag() {
-    return "menu-button";
+    handleEvent(event) {
+      this[`on${event.type}`](event);
+    }
+    onclick(e) {
+      this.sendToScreen();
+    }
+
+    //* METHODS
+    sendToScreen() {
+      if (!this.hasAttribute("link")) return;
+      this.dispatchEvent(ScreenController.Events.showScreen);
+    }
   }
-}
-MenuButton.defineSelfOnce();
+);
