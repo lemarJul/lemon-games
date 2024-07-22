@@ -2,13 +2,14 @@ import LemonOS from "../bootables/lemon-os/lemon-os.mjs";
 import SoundController from "../controllers/SoundController.mjs";
 import ButtonController from "../controllers/ButtonController.mjs";
 import ScreenController from "../controllers/ScreenController.mjs";
+import { Component } from "../modules/component.mjs";
 import {
   canStaticFetchContent,
   canStaticFetchStyle,
   canStaticRegisterFont,
 } from "../mixins/componentMixins.mjs";
 
-export default class LemonGamesElement extends Object.assign(
+class LemonGamesElement extends Object.assign(
   HTMLElement,
   canStaticFetchContent,
   canStaticFetchStyle,
@@ -65,6 +66,4 @@ await LemonGamesElement._fetchContent(import.meta.url);
 await LemonGamesElement._fetchStyle(import.meta.url);
 await LemonGamesElement._registerFont();
 
-if (!customElements.get("lemon-games")) {
-  customElements.define("lemon-games", LemonGamesElement);
-}
+export default Component.define("lemon-games", LemonGamesElement);

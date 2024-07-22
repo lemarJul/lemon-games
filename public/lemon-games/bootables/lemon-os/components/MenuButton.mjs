@@ -2,11 +2,9 @@ import { Component } from "../../../modules/component.mjs";
 import { canLinkLocalStyle } from "../../../mixins/componentMixins.mjs";
 import ScreenController from "../../../controllers/ScreenController.mjs";
 
-const { css, html } = await Component.fetchHtmlCss(import.meta.url);
-
 export default Component.define(
   "menu-button",
-  class extends canLinkLocalStyle(HTMLElement) {
+  class MenuButton extends canLinkLocalStyle(HTMLElement) {
     constructor() {
       super();
     }

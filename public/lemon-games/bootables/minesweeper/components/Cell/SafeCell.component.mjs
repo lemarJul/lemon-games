@@ -1,28 +1,34 @@
+import { Component } from "../../../../modules/component.mjs";
 import AbstractCell from "./AbstractCell.component.mjs";
 
-export default class SafeCell extends AbstractCell {
-  static _tagName = "safe-cell";
-  #nAdjacentMines;
+export default Component.define(
+  "safe-cell",
 
-  constructor(x, y, nAdjacentMines) {
-    super(x, y);
-    this.#nAdjacentMines = nAdjacentMines;
-  }
-  get hasAdjacentMines() {
-    return this.#nAdjacentMines !== 0;
-  }
+  class SafeCell extends AbstractCell {
+    #nAdjacentMines;
 
-  _reveal() {
-    super._reveal();
-    this.classList.add(`near${this.#nAdjacentMines}`);
-    this.dispatchEvent(new Event(SafeCell.events.revealed, { bubbles: true }));
-  }
+    constructor(x, y, nAdjacentMines) {
+      super(x, y);
+      this.#nAdjacentMines = nAdjacentMines;
+    }
+    get hasAdjacentMines() {
+      return this.#nAdjacentMines !== 0;
+    }
 
-  static get events() {
-    return {
-      ...super.eventTypes,
-      revealed: "lg-safe-cell-revealed",
-    };
-  }
-}
-SafeCell.registerAsComponent("button");
+    _reveal() {
+      super._reveal();
+      this.classList.add(`near${this.#nAdjacentMines}`);
+      this.dispatchEvent(
+        new Event(SafeCell.events.revealed, { bubbles: true })
+      );
+    }
+
+    static get events() {
+      return {
+        ...super.eventTypes,
+        revealed: "lg-safe-cell-revealed",
+      };
+    }
+  },
+  { extends: "button" }
+);

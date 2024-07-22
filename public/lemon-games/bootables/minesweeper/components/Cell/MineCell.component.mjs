@@ -1,20 +1,24 @@
+import { Component } from "../../../../modules/component.mjs";
 import AbstractCell from "./AbstractCell.component.mjs";
 
-export default class MineCell extends AbstractCell {
-  static _tagName = "mine-cell";
+export default Component.define(
+  "mine-cell",
+  class MineCell extends AbstractCell {
+    constructor(x, y) {
+      super(x, y);
+    }
 
-  constructor(x, y) {
-    super(x, y);
-  }
+    _reveal() {
+      super._reveal();
+      this.classList.add("mine");
+      this.dispatchEvent(
+        new Event(MineCell.events.exploded, { bubbles: true })
+      );
+    }
 
-  _reveal() {
-    super._reveal();
-    this.classList.add("mine");
-    this.dispatchEvent(new Event(MineCell.events.exploded, { bubbles: true }));
-  }
-
-  static get events() {
-    return { ...super.events, exploded: "lg-mine-exploded" };
-  }
-}
-MineCell.registerAsComponent("button");
+    static get events() {
+      return { ...super.events, exploded: "lg-mine-exploded" };
+    }
+  },
+  { extends: "button" }
+);

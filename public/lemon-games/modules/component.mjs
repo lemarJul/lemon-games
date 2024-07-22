@@ -1,5 +1,5 @@
 export class Component {
-  static define(name, Component, extendsValue) {
+  static define(name, Component, { extends: extendsValue } = {}) {
     if (!customElements.get(name)) {
       customElements.define(name, Component, { extends: extendsValue });
     }

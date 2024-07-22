@@ -20,7 +20,6 @@ export default class SquareMatrix extends Array2D {
   }
 
   get safeCellsCount() {
-    console.log("called:  safeCellsCount");
     return this.length * this.length - this.nMines;
   }
 

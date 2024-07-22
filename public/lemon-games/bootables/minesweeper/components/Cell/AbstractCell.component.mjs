@@ -1,8 +1,4 @@
-import { canStaticRegisterAsComponent } from "../../../../mixins/componentMixins.mjs";
-
-export default class AbstractCell extends canStaticRegisterAsComponent(
-  HTMLButtonElement
-) {
+export default class AbstractCell extends HTMLButtonElement {
   constructor(x, y) {
     super();
     this.x = x;
