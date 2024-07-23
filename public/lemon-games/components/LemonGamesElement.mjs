@@ -4,17 +4,17 @@ import ButtonController from "../controllers/ButtonController.mjs";
 import ScreenController from "../controllers/ScreenController.mjs";
 import { Component } from "../modules/component.mjs";
 import {
+  compose,
   canStaticFetchContent,
   canStaticFetchStyle,
   canStaticRegisterFont,
 } from "../mixins/componentMixins.mjs";
 
-class LemonGamesElement extends Object.assign(
-  HTMLElement,
-  canStaticFetchContent,
+class LemonGamesElement extends compose(
   canStaticFetchStyle,
+  canStaticFetchContent,
   canStaticRegisterFont
-) {
+)(HTMLElement) {
   constructor(osConstructor = LemonOS) {
     super();
     this._osConstructor = osConstructor;
