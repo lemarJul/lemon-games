@@ -54,7 +54,13 @@ export default class ScreenController extends AbstractController {
 
   _registerEventListeners() {
     this.wrappedElement.addEventListener("showScreen", (e) => {
-      const screenId = e.target.getAttribute("link");
+      const screenId = e.target.getAttribute("showScreen");
+      this.display[screenId]();
+    });
+  }
+  _removeEventListeners() {
+    this.wrappedElement.removeEventListener("showScreen", (e) => {
+      const screenId = e.target.getAttribute("showScreen");
       this.display[screenId]();
     });
   }

@@ -5,8 +5,9 @@ import ScreenController from "../../../controllers/ScreenController.mjs";
 export default Component.define(
   "menu-button",
   class MenuButton extends canLinkLocalStyle(HTMLElement) {
-    constructor() {
+    constructor({ showScreen } = {}) {
       super();
+      showScreen && this.setAttribute("showScreen", showScreen);
     }
     connectedCallback() {
       this.tabIndex = 0;
@@ -28,7 +29,7 @@ export default Component.define(
 
     //* METHODS
     sendToScreen() {
-      if (!this.hasAttribute("link")) return;
+      if (!this.hasAttribute("showScreen")) return;
       this.dispatchEvent(ScreenController.Events.showScreen);
     }
   }
