@@ -11,6 +11,7 @@ import {
   canStaticFetchStyle,
   canStaticRegisterFont,
 } from "../mixins/componentMixins.mjs";
+import PowerButtonComponent from "./PowerButton.component.mjs";
 
 class LemonGames extends compose(
   canStaticFetchStyle,
@@ -48,14 +49,6 @@ class LemonGames extends compose(
 
   connectedCallback() {
     this._os = new this._osConstructor(this);
-    this._registerEventListeners();
-  }
-
-  _registerEventListeners() {
-    this.buttonController.powerButton.addEventListener(
-      "click",
-      this.togglePower.bind(this)
-    );
   }
 
   togglePower() {
