@@ -1,10 +1,12 @@
 import CellFactory from "../Cell/CellFactory.mjs";
 import { cellEvents } from "../Cell/index.mjs";
-import { Component } from "../../../../modules/component.mjs";
+import { Component } from "../../../../modules/Component.mjs";
+import { canLinkLocalStyle } from "../../../../mixins/componentMixins.mjs";
+const style = await Component.fetchStyle(import.meta.url);
 
 export default Component.define(
   "square-grid",
-  class Grid extends HTMLElement {
+  class Grid extends canLinkLocalStyle(HTMLElement) {
     #matrix;
     #safeCellsToRevealed;
     constructor(matrix) {
@@ -15,6 +17,7 @@ export default Component.define(
     }
 
     #render() {
+      // this.prepend(style.cloneNode(true));
       this.style.setProperty("--n-columns", this.#matrix.length);
 
       this.#matrix.forEach((row, x) => {
@@ -25,6 +28,7 @@ export default Component.define(
     }
 
     connectedCallback() {
+      this.linkLocalStyle(import.meta.url);
       this.#eventsListeners.forEach(({ on, handler, options }) => {
         this.addEventListener(on, handler, options);
       });
