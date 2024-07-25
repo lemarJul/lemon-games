@@ -1,16 +1,16 @@
-lemon-screen {
-    font-family: var(--screen-font);
-  }
-  
-  lemon-screen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: inherit;
-    height: inherit;
-    justify-content: space-between;
-  }
-  lemon-screen.disabled-screen {
+.screen {
+  font-family: var(--screen-font);
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: inherit;
+  height: inherit;
+  justify-content: space-between;
+}
+/* lemon-screen.disabled-screen {
     display: none;
-  }
+  } */

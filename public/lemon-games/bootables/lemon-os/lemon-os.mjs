@@ -46,7 +46,7 @@ export default class LemonOS extends AbstractExe {
   _renderScreenComponents(factoryFns) {
     Object.values(factoryFns).forEach(async (createScreen) => {
       const screen = await createScreen(this);
-      this.screenController.addScreenElementToDOM(screen);
+      this.screenController.appendChild(screen);
     });
   }
 
@@ -65,9 +65,8 @@ export default class LemonOS extends AbstractExe {
   }
 
   updateGameList(game) {
-    const gameList =
-      this.screenController.wrappedElement.querySelector("#games-list");
-    const button = document.createElement("menu-button");
+    const gameList = this.screenController.querySelector("#games-list");
+    const button = new MenuButton();
     button.innerHTML = game.name;
     button.addEventListener("click", () => {
       game.boot();

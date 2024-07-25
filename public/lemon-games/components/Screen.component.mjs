@@ -1,5 +1,5 @@
 import { canLinkLocalStyle } from "../mixins/componentMixins.mjs";
-import { Component } from "../modules/component.mjs";
+import { Component } from "../modules/Component.mjs";
 
 export default Component.define(
   "lemon-screen",
@@ -8,10 +8,11 @@ export default Component.define(
 
     constructor(id, content, style, initializerFn) {
       super();
-      this.id = id;
-      this.appendChild(style);
-      this.innerHTML += content;
-      this._init = initializerFn;
+      id && (this.id = id);
+      style && this.appendChild(style);
+      content && (this.innerHTML += content);
+      this._init = initializerFn ?? (() => {});
+      this.classList.add("screen");
     }
     get name() {
       const toCamelCase = (str) => {

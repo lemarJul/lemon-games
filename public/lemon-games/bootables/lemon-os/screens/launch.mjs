@@ -13,7 +13,7 @@ export default async (manager) => {
   function AnimateToNextScreen() {
     manager.soundController.play.start();
     setTimeout(() => {
-      manager.screenController.display.lemonosMenu();
+      manager.screenController.display("lemonos-menu");
     }, 3000);
   }
 };

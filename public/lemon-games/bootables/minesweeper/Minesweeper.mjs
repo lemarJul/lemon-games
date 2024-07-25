@@ -18,13 +18,13 @@ export default class MineSweeperManager extends AbstractExe {
   newGame() {
     const difficulty = this.HTMLElements.difficulty.value;
     const safeCorners = this.HTMLElements.safeCorners.value === "true";
-    this.screenController.screens.minesweeperGrid.newGame(
+    this.screenController.children["minesweeper-grid"].newGame(
       difficulty,
       safeCorners
     );
   }
 
   boot() {
-    this.screenController.display.minesweeperMenu();
+    this.screenController.display("minesweeper-menu");
   }
 }

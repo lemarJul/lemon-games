@@ -26,9 +26,12 @@ class LemonGames extends compose(
 
     this.shadowRoot.descendants = DescendantsProvider(this.shadowRoot);
     this.soundController = new SoundController(this.shadowRoot);
-    this.screenController = new ScreenController(
-      this.shadowRoot.querySelector("#display")
-    );
+    this.screenController = this.shadowRoot.querySelector("#display");
+    // this.shadowRoot.nextProvider = nextProvider(this.shadowRoot);
+    // this.shadowRoot.nextProvider.register({
+    //   timer: "minesweeper-timer",
+    // });
+
     this.buttonController = new ButtonController(this.shadowRoot);
     this.buttonController.exposeElements([
       ["#game-container", "gameContainer"],

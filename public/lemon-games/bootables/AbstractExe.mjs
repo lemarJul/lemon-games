@@ -22,10 +22,11 @@ export default class AbstractExe {
   }
 
   async _renderScreenComponents(factoryFns) {
-    return Promise.all(Object.values(factoryFns).map(async (createScreen) => {
-      const screen = await createScreen(this);
-      this.screenController.addScreenElementToDOM(screen);
-    }));
+    return Promise.all(
+      Object.values(factoryFns).map(async (createScreen) => {
+        const screen = await createScreen(this);
+        this.screenController.appendChild(screen);
+      })
+    );
   }
-
 }

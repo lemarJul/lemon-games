@@ -13,7 +13,7 @@ export default async (manager) => {
     const resumeButton = screen.querySelector("#resume-button");
 
     const resumeGame = () => {
-      manager.screenController.display.minesweeperGrid();
+      manager.screenController.display("minesweeper-grid");
       manager.HTMLElements.timer.run();
     };
     resumeButton.addEventListener("click", resumeGame);
