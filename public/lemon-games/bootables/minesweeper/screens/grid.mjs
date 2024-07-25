@@ -23,7 +23,7 @@ export default async (manager) => {
 
   function initGridWin() {
     screen.addEventListener(Grid.events.complete, () => {
-      manager.screenController.display.minesweeperWin();
+      manager.screenController.display("minesweeper-win");
       screen.timer.pause();
     });
   }
@@ -32,7 +32,7 @@ export default async (manager) => {
     screen.addEventListener(Grid.events.stopped, () => {
       manager.soundController.play.boom();
       setTimeout(() => {
-        manager.screenController.display.minesweeperFail();
+        manager.screenController.display("minesweeper-fail");
       }, 1500);
     });
   }
@@ -41,7 +41,7 @@ export default async (manager) => {
   function initStartButton() {
     manager.buttonController.startButton.addEventListener("click", () => {
       screen.timer.pause();
-      manager.screenController.display.minesweeperPaused();
+      manager.screenController.display("minesweeper-paused");
     });
   }
 
@@ -52,6 +52,6 @@ export default async (manager) => {
     screen.replaceChild(newGrid, oldGrid);
     screen.flagCounter.value = newGrid.nMines;
     screen.timer.reset();
-    manager.screenController.display.minesweeperGrid();
+    manager.screenController.display("minesweeper-grid");
   }
 };
