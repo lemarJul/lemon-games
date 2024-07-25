@@ -1,5 +1,4 @@
-import { Component } from "../../../modules/component.mjs";
-
+import { Component } from "../../../modules/Component.mjs";
 import Counter from "./Counter.component.mjs";
 import { cellEvents } from "./Cell/index.mjs";
 

@@ -1,4 +1,4 @@
-import { Component } from "../../../../modules/component.mjs";
+import { Component } from "../../../../modules/Component.mjs";
 import AbstractCell from "./AbstractCell.component.mjs";
 
 export default Component.define(

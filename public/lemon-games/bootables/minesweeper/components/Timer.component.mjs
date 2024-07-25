@@ -1,4 +1,4 @@
-import { Component } from "../../../modules/component.mjs";
+import { Component } from "../../../modules/Component.mjs";
 
 
 export default Component.define(

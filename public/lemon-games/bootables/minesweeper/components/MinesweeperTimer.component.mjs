@@ -1,8 +1,7 @@
 import Timer from "./Timer.component.mjs";
 import Grid from "./Grid/Grid.component.mjs";
-import { Component } from "../../../modules/component.mjs";
-
-
+import { Component } from "../../../modules/Component.mjs";
+import { canLinkLocalStyle } from "../../../mixins/componentMixins.mjs";
 
 export default Component.define(
   "minesweeper-timer",

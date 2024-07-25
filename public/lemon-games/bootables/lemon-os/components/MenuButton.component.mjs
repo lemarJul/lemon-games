@@ -1,4 +1,4 @@
-import { Component } from "../../../modules/component.mjs";
+import { Component } from "../../../modules/Component.mjs";
 import { canLinkLocalStyle } from "../../../mixins/componentMixins.mjs";
 import ScreenController from "../../../controllers/ScreenController.mjs";
 

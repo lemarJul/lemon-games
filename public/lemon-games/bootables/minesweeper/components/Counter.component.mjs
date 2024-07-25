@@ -1,4 +1,8 @@
-import { Component } from "../../../modules/component.mjs";
+import { Component } from "../../../modules/Component.mjs";
+
+const html = `
+  <span  name=count></span=>
+`;
 
 export default Component.define(
   "counter-component",
