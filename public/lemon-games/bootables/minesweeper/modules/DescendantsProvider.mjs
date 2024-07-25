@@ -1,5 +1,5 @@
 export default (parentNode) => {
-  return class HTMLElementsProvider {
+  return class DescendantsProvider {
     static get gameContainer() {
       return parentNode.getElementById("game-container");
     }
@@ -40,9 +40,9 @@ export default (parentNode) => {
     static get display() {
       return parentNode.querySelector("#display");
     }
-    static get powerButton() {
-      return parentNode.querySelector("#power-button");
-    }
+    // static get powerButton() {
+    //   return parentNode.querySelector("#power-button");
+    // }
     static get leftButton() {
       return parentNode.querySelector("#left-button");
     }
@@ -57,6 +57,20 @@ export default (parentNode) => {
     }
     static get flagCounter() {
       return parentNode.querySelector("flag-counter");
+    }
+  };
+};
+
+export const nextProvider = (parentNode) => {
+  return class newDescendantsProvider {
+    static register(descendants) {
+      for (const [key, selector] of Object.entries(descendants)) {
+        Object.defineProperty(newDescendantsProvider, key, {
+          get() {
+            return parentNode.querySelector(selector);
+          },
+        });
+      }
     }
   };
 };

@@ -1,5 +1,5 @@
 import AbstractExe from "../AbstractExe.mjs";
-import HTMLElements from "./modules/HtmlElements.mjs";
+import DescendantsProvider from "./modules/DescendantsProvider.mjs";
 
 import * as screenComponents from "./screens/index.mjs";
 export default class MineSweeperManager extends AbstractExe {
@@ -10,7 +10,7 @@ export default class MineSweeperManager extends AbstractExe {
       buttonController,
       soundController,
     });
-    this.HTMLElements = HTMLElements(this.screenController.wrappedElement);
+    this.HTMLElements = DescendantsProvider(this.screenController);
 
     this._renderScreenComponents(screenComponents).then(() => {});
   }

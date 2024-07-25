@@ -1,8 +1,10 @@
 import LemonOS from "../bootables/lemon-os/lemon-os.mjs";
 import SoundController from "../controllers/SoundController.mjs";
 import ButtonController from "../controllers/ButtonController.mjs";
-import ScreenController from "../controllers/ScreenController.mjs";
-import { Component } from "../modules/component.mjs";
+import DescendantsProvider, {
+  nextProvider,
+} from "../bootables/minesweeper/modules/DescendantsProvider.mjs";
+import { Component } from "../modules/Component.mjs";
 import {
   compose,
   canStaticFetchContent,
@@ -10,7 +12,7 @@ import {
   canStaticRegisterFont,
 } from "../mixins/componentMixins.mjs";
 
-class LemonGamesElement extends compose(
+class LemonGames extends compose(
   canStaticFetchStyle,
   canStaticFetchContent,
   canStaticRegisterFont
@@ -19,9 +21,10 @@ class LemonGamesElement extends compose(
     super();
     this._osConstructor = osConstructor;
     this.attachShadow({ mode: "open" });
-    this.shadowRoot.appendChild(LemonGamesElement.style);
-    this.shadowRoot.innerHTML += LemonGamesElement.content;
+    this.shadowRoot.appendChild(LemonGames.style);
+    this.shadowRoot.innerHTML += LemonGames.content;
 
+    this.shadowRoot.descendants = DescendantsProvider(this.shadowRoot);
     this.soundController = new SoundController(this.shadowRoot);
     this.screenController = new ScreenController(
       this.shadowRoot.querySelector("#display")
@@ -62,8 +65,8 @@ class LemonGamesElement extends compose(
     }
   }
 }
-await LemonGamesElement._fetchContent(import.meta.url);
-await LemonGamesElement._fetchStyle(import.meta.url);
-await LemonGamesElement._registerFont();
+await LemonGames._fetchContent(import.meta.url);
+await LemonGames._fetchStyle(import.meta.url);
+await LemonGames._registerFont();
 
-export default Component.define("lemon-games", LemonGamesElement);
+export default Component.define("lemon-games", LemonGames);
