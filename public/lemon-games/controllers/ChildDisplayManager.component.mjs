@@ -36,7 +36,7 @@ export default Component.define(
       this.#removeEventListeners();
     }
 
-    ≈() {
+    enable() {
       this.display("lemonos-launch");
     }
 

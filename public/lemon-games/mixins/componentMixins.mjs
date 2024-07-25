@@ -1,5 +1,3 @@
-
-
 //*STATIC METHODS
 export const canStaticFetchContent = (superclass) => {
   return class extends superclass {
@@ -40,8 +38,8 @@ export function canLinkLocalStyle(superClass) {
       link.rel = "stylesheet";
       link.href = componentStyleURL(componentPath);
       rootNode.prepend(link);
-      console.log("Style linked from URL:", componentPath);
-      console.log("Loaded once:", this.constructor.loadedOnce);
+      // console.log("Style linked from URL:", componentPath);
+      // console.log("Loaded once:", this.constructor.loadedOnce);
     }
   };
 }
