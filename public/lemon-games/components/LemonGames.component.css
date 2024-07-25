@@ -81,7 +81,7 @@
   transition: background, box-shadow 0.3s;
 }
 
-:host-context([data-power]) #power-light {
+:host([data-power]) #power-light {
   box-shadow: 0 0 5px 1px var(--color-light-red),
     0 0 1px 2px var(--color-primary-darkest),
     2px 2px 3px 1px var(--color-screen-light),
@@ -117,7 +117,7 @@
   font-family: var(--screen-font);
 }
 
-:host-context([data-power]) #display {
+:host([data-power]) #display {
   visibility: visible;
   opacity: 1;
   transition: visibility 0s 0.5s;
@@ -264,18 +264,18 @@
 }
 
 /* .screen {
-    font-family: var(--screen-font);
+  font-family: var(--screen-font);
 } */
-  
+
 /* .screen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: inherit;
-    height: inherit;
-    justify-content: space-between;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: inherit;
+  height: inherit;
+  justify-content: space-between;
+}
 .screen.disabled-screen {
-    display: none;
+  display: none;
 } */
