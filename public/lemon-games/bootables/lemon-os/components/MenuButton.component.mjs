@@ -1,6 +1,6 @@
 import { Component } from "../../../modules/Component.mjs";
 import { canLinkLocalStyle } from "../../../mixins/componentMixins.mjs";
-import ScreenController from "../../../controllers/ScreenController.mjs";
+import ScreenController from "../../../controllers/ChildDisplayManager.component.mjs";
 
 export default Component.define(
   "menu-button",
