@@ -7,6 +7,10 @@ export default Component.define(
     constructor(x, y) {
       super(x, y);
     }
+    connectedCallback() {
+      super.connectedCallback();
+      this.linkLocalStyle(import.meta.url);
+    }
 
     _reveal() {
       super._reveal();

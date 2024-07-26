@@ -1,9 +1,10 @@
-export default class AbstractCell extends HTMLButtonElement {
+import { canLinkLocalStyle } from "../../../../mixins/componentMixins.mjs";
+
+export default class AbstractCell extends canLinkLocalStyle(HTMLButtonElement) {
   constructor(x, y) {
     super();
     this.x = x;
     this.y = y;
-
     this.render();
   }
 
@@ -14,6 +15,7 @@ export default class AbstractCell extends HTMLButtonElement {
 
   // LIFECYCLE METHODS
   connectedCallback() {
+    this.linkLocalStyle(import.meta.url);
     this.addEventListener("click", this, { once: true });
     this.addEventListener("contextmenu", this);
   }

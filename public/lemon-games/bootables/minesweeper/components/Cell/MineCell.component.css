@@ -1,0 +1,6 @@
+.cell.mine {
+  background-color: rgb(228, 84, 68);
+}
+.cell.mine::after {
+  content: "X";
+}

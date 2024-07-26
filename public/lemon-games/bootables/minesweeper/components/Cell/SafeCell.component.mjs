@@ -3,7 +3,6 @@ import AbstractCell from "./AbstractCell.component.mjs";
 
 export default Component.define(
   "safe-cell",
-
   class SafeCell extends AbstractCell {
     #nAdjacentMines;
 
@@ -11,6 +10,11 @@ export default Component.define(
       super(x, y);
       this.#nAdjacentMines = nAdjacentMines;
     }
+    connectedCallback() {
+      super.connectedCallback();
+      this.linkLocalStyle(import.meta.url);
+    }
+
     get hasAdjacentMines() {
       return this.#nAdjacentMines !== 0;
     }

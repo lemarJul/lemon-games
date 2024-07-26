@@ -1,0 +1,44 @@
+.cell {
+  position: relative;
+  padding: 0;
+  border: none;
+  aspect-ratio: 1/1;
+  background-color: var(--color-screen-medium);
+  box-shadow: 0 0 0 0.1em var(--color-screen-light);
+  font-size: small;
+  cursor: pointer;
+  color: var(--color-screen-dark);
+  font-weight: bold;
+}
+.cell:hover:not(.revealed) {
+  background-color: var(--color-screen-dark);
+}
+
+.cell.revealed {
+  /* animation: pulse 0.25s ease-out alternate; */
+  background-color: var(--color-screen-light);
+}
+@keyframes pulse {
+  from {
+    transform: scale(0.9);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.cell::after {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cell.flagged::after {
+  color: var(--color-screen-light);
+  background-color: var(--color-screen-dark);
+  content: "F";
+}
