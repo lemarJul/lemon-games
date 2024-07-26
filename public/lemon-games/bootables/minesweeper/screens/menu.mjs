@@ -17,7 +17,7 @@ export default async (manager) => {
     };
 
     const hooked =
-      manager.screenController.wrappedElement.querySelectorAll(
+      manager.screenController.querySelectorAll(
         "[data-js-hook]"
       );
 
