@@ -5,9 +5,14 @@ import { canLinkLocalStyle } from "../../../mixins/componentMixins.mjs";
 
 export default Component.define(
   "minesweeper-timer",
-  class MinesweeperTimer extends Timer {
+  class MinesweeperTimer extends canLinkLocalStyle(Timer) {
     static _tagName = "minesweeper-timer";
     abortController = new AbortController();
+
+    constructor() {
+      super();
+      this.linkLocalStyle(import.meta.url);
+    }
 
     connectedCallback() {
       [
