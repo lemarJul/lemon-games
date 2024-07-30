@@ -1,7 +1,7 @@
 import { Component } from "../../../modules/Component.mjs";
 
 const html = `
-  <span  name=count></span=>
+  <span name=count></span>
 `;
 
 export default Component.define(
@@ -12,6 +12,7 @@ export default Component.define(
     }
     constructor(value = 0) {
       super();
+      this.attachShadow({ mode: "open" }).innerHTML = html;
       this.value = value;
     }
     increment() {
@@ -27,7 +28,7 @@ export default Component.define(
       this.setAttribute("value", n);
     }
     attributeChangedCallback(name, oldValue, newValue) {
-      this.innerText = this.#formated(newValue);
+      this.shadowRoot.children["count"].innerHTML = this.#formated(newValue);
     }
     #formated(n) {
       return ("00" + n).slice(-2);
