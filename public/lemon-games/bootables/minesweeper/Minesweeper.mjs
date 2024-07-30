@@ -16,6 +16,15 @@ export default class MineSweeperManager extends AbstractExe {
 
     this._renderScreenComponents(screenComponents).then(() => {});
   }
+  get timer() {
+    return this.HTMLElements.timer;
+  }
+  get flagCounter() {
+    return this.HTMLElements.flagCounter;
+  }
+  get difficulty() {
+    return this.HTMLElements.difficulty;
+  }
 
   newGame() {
     const difficulty = this.HTMLElements.difficulty.value;

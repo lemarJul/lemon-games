@@ -55,7 +55,7 @@ export default async (manager) => {
 
       const name = nameInput.value;
       const score = manager.timer.time.toString();
-      const difficulty = manager.HTMLElements.difficulty.value;
+      const difficulty = manager.difficulty.value;
       try {
         const res = await manager.dataController.setData({
           name,

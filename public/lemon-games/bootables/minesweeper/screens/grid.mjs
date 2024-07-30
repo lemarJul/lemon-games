@@ -8,8 +8,8 @@ export default async (manager) => {
     import.meta.url,
     {
       init: function init() {
-        screen.timer = manager.HTMLElements.timer;
-        screen.flagCounter = manager.HTMLElements.flagCounter;
+        screen.timer = manager.timer;
+        screen.flagCounter = manager.flagCounter;
         screen.newGame = newGame;
 
         initGridWin();
