@@ -10,7 +10,6 @@ export class Component {
     return fetch(path.replace(/\.mjs$/, ".html"))
       .then((response) => response.text())
       .then((text) => {
-        console.log("text", text);
         return Component.parseHTML(text);
       });
   }

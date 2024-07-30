@@ -18,7 +18,6 @@ export default Component.define(
       this.linkLocalStyle(import.meta.url);
     }
     attributeChangedCallback(name, oldValue, newValue) {
-      console.log({ name, oldValue, newValue });
       if (name === attributes.visibleChild) {
         this.children[oldValue]?.classList.remove(attributes.visibleChild);
         this.children[newValue]?.classList.add(attributes.visibleChild);
