@@ -29,17 +29,30 @@ export function canLinkLocalStyle(superClass) {
 
     linkLocalStyle(
       componentPath,
-      { once = true, rootNode = this.getRootNode(), type = "link" } = {}
+      { once = true, rootNode = this.getRootNode(), type = "style" } = {}
     ) {
       if (this.constructor.loadedOnce.includes(componentPath)) return;
       if (once) this.constructor.loadedOnce.push(componentPath);
 
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = componentStyleURL(componentPath);
-      rootNode.prepend(link);
-      // console.log("Style linked from URL:", componentPath);
-      // console.log("Loaded once:", this.constructor.loadedOnce);
+      if (type === "link") {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = componentStyleURL(componentPath);
+        rootNode.prepend(link);
+        // console.log("Style linked from URL:", componentPath);
+        // console.log("Loaded once:", this.constructor.loadedOnce);
+      }
+      if (type === "style") {
+        const style = document.createElement("style");
+        fetch(componentStyleURL(componentPath))
+          .then((response) => response.text())
+          .then((text) => {
+            style.textContent = text;
+            rootNode.prepend(style);
+          });
+        // console.log("Style linked from URL:", componentPath);
+        // console.log("Loaded once:", this.constructor.loadedOnce);
+      }
     }
   };
 }
