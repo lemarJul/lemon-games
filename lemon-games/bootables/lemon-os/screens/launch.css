@@ -1,0 +1,15 @@
+#launch {
+  justify-content: space-between;
+  padding: 25px;
+}
+#logo {
+  position: absolute;
+  bottom: 60px;
+  height: 190px;
+  filter: sepia(70%) saturate(70%) hue-rotate(99deg) brightness(70%)
+    contrast(100%);
+  transform: rotate(45deg) scaleX(-1);
+}
+#launch p {
+    font-size: small;
+}

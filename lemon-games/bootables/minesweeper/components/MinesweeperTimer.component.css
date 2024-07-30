@@ -1,0 +1,3 @@
+minesweeper-timer::after {
+  content: " sec";
+}

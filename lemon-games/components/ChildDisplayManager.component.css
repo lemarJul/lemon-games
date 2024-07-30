@@ -1,0 +1,3 @@
+child-display-manager > *:not(.selected-child) {
+  display: none;
+}

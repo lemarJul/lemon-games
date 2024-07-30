@@ -1,0 +1,31 @@
+#difficulty-table {
+  text-align: initial;
+  align-self: center;
+  width: 100%;
+  font-size: small;
+}
+#difficulty-table tr {
+  text-align: right;
+  color: var(--color-screen-medium);
+}
+#difficulty-table tr.active {
+  color: var(--color-screen-dark);
+}
+#difficulty-table th {
+  text-align: left;
+}
+
+input[type="radio"] {
+  display: none;
+}
+input[type="radio"] + label {
+  margin: 0 10px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: small;
+  color: var(--color-screen-medium);
+}
+input[type="radio"]:checked + label {
+  background-color: var(--color-screen-light);
+  color: var(--color-screen-dark);
+}

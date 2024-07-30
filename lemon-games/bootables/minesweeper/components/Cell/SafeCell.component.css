@@ -1,0 +1,24 @@
+:host(.near1)::after {
+  content: "1";
+}
+:host(.near2)::after {
+  content: "2";
+}
+:host(.near3)::after {
+  content: "3";
+}
+:host(.near4)::after {
+  content: "4";
+}
+:host(.near5)::after {
+  content: "5";
+}
+:host(.near6)::after {
+  content: "6";
+}
+:host(.near7)::after {
+  content: "7";
+}
+:host(.near8)::after {
+  content: "8";
+}

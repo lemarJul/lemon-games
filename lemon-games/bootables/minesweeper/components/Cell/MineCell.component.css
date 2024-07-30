@@ -1,0 +1,6 @@
+:host(.revealed) {
+  background-color: rgb(228, 84, 68);
+}
+:host(.revealed)::after {
+  content: "X";
+}

@@ -1,0 +1,30 @@
+<div id="winHeadband">
+  <p>You Win in</p>
+  <p><span id="time-result">000</span>s !</p>
+</div>
+<form>
+  <input
+    type="text"
+    id="name-submit"
+    placeholder="Your name here"
+    minlength="3"
+    maxlength="20"
+    required
+  />
+  <input
+    type="submit"
+    id="submit"
+    class="menu-button call-to-action"
+    value="Save Your Score"
+  />
+</form>
+<span>
+  <p id="error-message" class="submit-message">Sorry, something went wrong.</p>
+  <p id="success-message" class="submit-message">Your score has been saved!</p>
+</span>
+<div class="bottom-buttons">
+  <menu-button bottom showScreen="minesweeper-grid" data-js-hook="click:new game"
+    >Start Again</menu-button
+  >
+  <menu-button showScreen="minesweeper-menu" bottom> Exit </menu-button>
+</div>

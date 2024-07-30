@@ -1,0 +1,27 @@
+<h2 class="menu-title">Leaderboard</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Name</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody id="easy-body"></tbody>
+  <tbody id="medium-body"></tbody>
+  <tbody id="hard-body"></tbody>
+</table>
+
+<div class="bottom-buttons">
+  <menu-button toggle bottom> Easy </menu-button>
+  <menu-button showScreen="minesweeper-menu" bottom> Exit </menu-button>
+</div>
+
+<template id="score-template">
+  <tr>
+    <td class="rank"></td>
+    <td class="name"></td>
+    <td class="score"></td>
+  </tr>
+</template>
