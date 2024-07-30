@@ -1,17 +1,22 @@
 import { Component } from "../../../../modules/Component.mjs";
 import AbstractCell from "./AbstractCell.component.mjs";
 
+const style = await Component.fetchStyle(import.meta.url);
+
 export default Component.define(
   "mine-cell",
   class MineCell extends AbstractCell {
     constructor(x, y) {
       super(x, y);
     }
+
+    // LIFECYCLE METHODS
     connectedCallback() {
       super.connectedCallback();
-      this.linkLocalStyle(import.meta.url);
+      this.shadowRoot.appendChild(style.cloneNode(true));
     }
 
+    // METHODS
     _reveal() {
       super._reveal();
       this.classList.add("mine");
@@ -20,9 +25,9 @@ export default Component.define(
       );
     }
 
+    // EVENTS
     static get events() {
       return { ...super.events, exploded: "lg-mine-exploded" };
     }
-  },
-  { extends: "button" }
+  }
 );

@@ -1,6 +1,6 @@
-.cell.mine {
+:host(.revealed) {
   background-color: rgb(228, 84, 68);
 }
-.cell.mine::after {
+:host(.revealed)::after {
   content: "X";
 }

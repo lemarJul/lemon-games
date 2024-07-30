@@ -1,4 +1,4 @@
-.cell {
+:host {
   position: relative;
   padding: 0;
   border: none;
@@ -10,14 +10,16 @@
   color: var(--color-screen-dark);
   font-weight: bold;
 }
-.cell:hover:not(.revealed) {
+
+:host(:hover:not(.revealed)) {
   background-color: var(--color-screen-dark);
 }
 
-.cell.revealed {
+:host(.revealed) {
   /* animation: pulse 0.25s ease-out alternate; */
   background-color: var(--color-screen-light);
 }
+
 @keyframes pulse {
   from {
     transform: scale(0.9);
@@ -26,7 +28,8 @@
     transform: scale(1);
   }
 }
-.cell::after {
+
+:host::after {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -37,7 +40,8 @@
   align-items: center;
   justify-content: center;
 }
-.cell.flagged::after {
+
+:host(.flagged)::after {
   color: var(--color-screen-light);
   background-color: var(--color-screen-dark);
   content: "F";

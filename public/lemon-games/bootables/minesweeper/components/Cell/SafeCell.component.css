@@ -1,24 +1,24 @@
-.cell.near1::after {
+:host(.near1)::after {
   content: "1";
 }
-.cell.near2::after {
+:host(.near2)::after {
   content: "2";
 }
-.cell.near3::after {
+:host(.near3)::after {
   content: "3";
 }
-.cell.near4::after {
+:host(.near4)::after {
   content: "4";
 }
-.cell.near5::after {
+:host(.near5)::after {
   content: "5";
 }
-.cell.near6::after {
+:host(.near6)::after {
   content: "6";
 }
-.cell.near7::after {
+:host(.near7)::after {
   content: "7";
 }
-.cell.near8::after {
+:host(.near8)::after {
   content: "8";
 }

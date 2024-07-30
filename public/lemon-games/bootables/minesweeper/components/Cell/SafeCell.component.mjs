@@ -1,6 +1,8 @@
 import { Component } from "../../../../modules/Component.mjs";
 import AbstractCell from "./AbstractCell.component.mjs";
 
+const style = await Component.fetchStyle(import.meta.url);
+
 export default Component.define(
   "safe-cell",
   class SafeCell extends AbstractCell {
@@ -10,15 +12,19 @@ export default Component.define(
       super(x, y);
       this.#nAdjacentMines = nAdjacentMines;
     }
+
+    // LIFECYCLE METHODS
     connectedCallback() {
       super.connectedCallback();
-      this.linkLocalStyle(import.meta.url);
+      this.shadowRoot.appendChild(style.cloneNode(true));
     }
 
+    // GETTERS
     get hasAdjacentMines() {
       return this.#nAdjacentMines !== 0;
     }
 
+    // METHODS
     _reveal() {
       super._reveal();
       this.classList.add(`near${this.#nAdjacentMines}`);
@@ -27,12 +33,12 @@ export default Component.define(
       );
     }
 
+    // EVENTS
     static get events() {
       return {
         ...super.eventTypes,
         revealed: "lg-safe-cell-revealed",
       };
     }
-  },
-  { extends: "button" }
+  }
 );

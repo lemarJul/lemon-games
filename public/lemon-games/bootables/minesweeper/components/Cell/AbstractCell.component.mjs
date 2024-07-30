@@ -1,21 +1,18 @@
 import { canLinkLocalStyle } from "../../../../mixins/componentMixins.mjs";
+import { Component } from "../../../../modules/Component.mjs";
 
-export default class AbstractCell extends canLinkLocalStyle(HTMLButtonElement) {
+const style = await Component.fetchStyle(import.meta.url);
+
+export default class AbstractCell extends HTMLElement {
   constructor(x, y) {
     super();
     this.x = x;
     this.y = y;
-    this.render();
-  }
-
-  // RENDER
-  render() {
-    this.classList.add("cell");
   }
 
   // LIFECYCLE METHODS
   connectedCallback() {
-    this.linkLocalStyle(import.meta.url);
+    this.attachShadow({ mode: "open" }).appendChild(style.cloneNode(true));
     this.addEventListener("click", this, { once: true });
     this.addEventListener("contextmenu", this);
   }
