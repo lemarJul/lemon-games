@@ -1,0 +1,51 @@
+<h2 class="menu-title">Settings</h2>
+<div class="menu-actions">
+  <menu-button id="difficultyToggle" class="difficulty" toggle>
+    Difficulty
+  </menu-button>
+  <select id="difficulty-select" class="difficulty" hidden>
+    <!-- <option id="easy" value="easy" selected>Easy</option>
+    <option id="medium" value="medium">Medium</option>
+    <option id="hard" value="hard">Hard</option> -->
+  </select>
+
+  <table id="difficulty-table">
+    <tbody>
+      <!-- <tr class="active">
+        <th>Easy</th>
+        <td>8x8 Grid</td>
+        <td>10 Bombs</td>
+      </tr>
+      <tr>
+        <th>Normal</th>
+        <td>16x16 Grid</td>
+        <td>40 Bombs</td>
+      </tr>
+      <tr>
+        <th>Hard</th>
+        <td>20x20 Grid</td>
+        <td>75 Bombs</td>
+      </tr> -->
+    </tbody>
+  </table>
+
+  <!-- <input type="checkbox" id="sound" />
+    <label for="sound">Sound</label> -->
+  <menu-button id="safeCornersToggle" toggle>Safe Corners</menu-button>
+  <div>
+    <input
+      id="safeCornersOn"
+      type="radio"
+      name="safeCorners"
+      value="true"
+      checked
+    />
+    <label for="safeCornersOn">On</label>
+
+    <input id="safeCornersOff" type="radio" name="safeCorners" value="false" />
+    <label for="safeCornersOff">Off</label>
+    <!-- END: ed8c6549bwf9 -->
+  </div>
+</div>
+
+<menu-button showScreen="minesweeper-menu" bottom> Exit </menu-button>

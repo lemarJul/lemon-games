@@ -1,0 +1,11 @@
+square-grid {
+  width: inherit;
+  box-sizing: border-box;
+  padding: 15px;
+  align-self: flex-start;
+  display: grid;
+  grid-template-columns: repeat(
+    var(--n-columns),
+    calc(100% / var(--n-columns))
+  );
+}

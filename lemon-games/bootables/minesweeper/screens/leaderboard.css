@@ -1,0 +1,26 @@
+/* .panel-body {
+  width: 100%;
+} */
+
+#minesweeper-leaderboard table {
+  padding: 0 25px;
+}
+#minesweeper-leaderboard tbody {
+  height: 240px;
+  width: 100%;
+}
+#minesweeper-leaderboard th:nth-of-type(2) {
+  width: 450px;
+}
+
+#minesweeper-leaderboard tbody.disabled {
+  display: none;
+}
+#minesweeper-leaderboard tr {
+  border-bottom: 1px dotted var(--color-screen-dark);
+}
+
+#minesweeper-leaderboard thead {
+  color: var(--color-screen-medium);
+  font-size: small;
+}

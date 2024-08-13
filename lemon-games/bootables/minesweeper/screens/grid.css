@@ -1,0 +1,10 @@
+.hud-container {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--color-screen-dark);
+  color: var(--color-screen-light);
+  display: flex;
+  font-size: medium;
+  justify-content: space-between;
+  padding: 5px 15px;
+}
